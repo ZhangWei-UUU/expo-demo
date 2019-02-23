@@ -5,7 +5,7 @@
 
 ## 编程之前该做的事
 
-1. 初始化应用`expo init your-app-name`, 在这时会看到两个选项:`blank`和`tabs`,选择后者，在项目生产的时候会构建好基于`react-navigation`的路由页面。本Demo选择`tabs`。 之后根据要求填入项目名称。然后开始加载相关依赖包。
+1. 初始化应用`expo init your-app-name`, 在这时会看到两个选项:`blank`和`tabs`,选择后者，在项目生产的时候会构建好基于`react-navigation`的路由页面。本Demo选择`tabs`之后根据要求填入项目名称,最后开始加载相关依赖包。
 
 2. 添加eslint增加代码规范性`eslint --init`
 
@@ -118,4 +118,6 @@ const styles = StyleSheet.create({
 在简单预览一下相关代码之后，我们先`yarn start`启动一下这个项目。
 
 ![](./images/window-tool.png)
+使用手机Expo客户端开发工具扫描二维码
 
+![](./images/index-pic.png)
