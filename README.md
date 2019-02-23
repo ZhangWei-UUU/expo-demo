@@ -9,7 +9,9 @@
 
 2. 添加eslint增加代码规范性`eslint --init`
 
-在项目构建后之后，我们看一下整个项目是如何组成的：
+3. 在Expo官网上注册好账户并下载android、ios的同名开发工具。
+
+在开始编程之前，我们看一下整个项目是如何组成的：
 
 app.json是整个项目的配置文件，我们先看下里面长什么样？
 
@@ -45,12 +47,14 @@ app.json是整个项目的配置文件，我们先看下里面长什么样？
 }
 ```
 
-看完了配置文件，我们看下它的主文件`App.js`的内容:
+看完了配置文件，我们看下它的主文件`App.js`的内容,纵览下来几乎很前端React没有任何区别:
 
 ```js
 import React from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
+// expo所封装的字体、Icon等等
 import { AppLoading, Asset, Font, Icon } from 'expo';
+// 路由栈（后面会详细介绍）
 import AppNavigator from './navigation/AppNavigator';
 
 export default class App extends React.Component {
@@ -60,6 +64,7 @@ export default class App extends React.Component {
 
   render() {
     if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
+      //AppLoading 是Expo的自带组件，它接收的属性参数均为function,分别为需要加载的资源、报错、完成
       return (
         <AppLoading
           startAsync={this._loadResourcesAsync}
@@ -76,26 +81,23 @@ export default class App extends React.Component {
       );
     }
   }
-
+  
+  //异步加载资源
   _loadResourcesAsync = async () => {
     return Promise.all([
+      // 首屏渲染所需要的相关图片
       Asset.loadAsync([
         require('./assets/images/robot-dev.png'),
         require('./assets/images/robot-prod.png'),
       ]),
-      Font.loadAsync({
-        // This is the font that we are using for our tab bar
-        ...Icon.Ionicons.font,
-        // We include SpaceMono because we use it in HomeScreen.js. Feel free
-        // to remove this if you are not using it in your app
-        'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
+      // 首屏渲染所需的字体库
+      Font.loadAsync({...Icon.Ionicons.font,'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
       }),
     ]);
   };
-
+  
+  //打印错误日志
   _handleLoadingError = error => {
-    // In this case, you might want to report the error to your error
-    // reporting service, for example Sentry
     console.warn(error);
   };
 
@@ -112,4 +114,8 @@ const styles = StyleSheet.create({
 });
 
 ```
+
+在简单预览一下相关代码之后，我们先`yarn start`启动一下这个项目。
+
+()[../window-tool.png]
 
