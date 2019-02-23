@@ -118,6 +118,8 @@ const styles = StyleSheet.create({
 在简单预览一下相关代码之后，我们先`yarn start`启动一下这个项目。
 
 ![](./images/window-tool.png)
-使用手机Expo客户端开发工具扫描二维码
-<img src="./images/index-pic.png" width="200">
-![](./images/index-pic.png )
+
+使用手机Expo客户端开发工具扫描二维码:
+<div>
+<img src="./images/index-pic.png" style="width:380;margin:0 auto"/>
+</div>
