@@ -120,6 +120,12 @@ const styles = StyleSheet.create({
 ![](./images/window-tool.png)
 
 使用手机Expo客户端开发工具扫描二维码:
-<div>
-<img src="./images/index-pic.png" width="400"/>
-</div>
+<img src="./images/index-pic.png" align="center" width="400" />
+
+到了这一步编程前所有的准备工作就已经全部做好了。
+
+## 编程
+
+1. [自定义ICON和SLASH](./wiki/iconslash.md)
+2. [解构路由](./wiki/navigator.md)
+3. [打包构建](./wiki/build.md)
