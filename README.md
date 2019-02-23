@@ -117,5 +117,5 @@ const styles = StyleSheet.create({
 
 在简单预览一下相关代码之后，我们先`yarn start`启动一下这个项目。
 
-()[../window-tool.png]
+![](../window-tool.png)
 
