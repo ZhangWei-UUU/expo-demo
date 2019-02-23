@@ -120,9 +120,10 @@ const styles = StyleSheet.create({
 ![](./images/window-tool.png)
 
 使用手机Expo客户端开发工具扫描二维码:
-<img src="./images/index-pic.png" align="center" width="400" />
-
-到了这一步编程前所有的准备工作就已经全部做好了。
+<div>
+    <img src="./images/index-pic.png" align="center" width="400" />
+</div>
+到了这一步编程前所有的准备工作就已经全部做好了。最后请谨记React Native不支持CSS，所有的样式只能通过Stylesheet注入或者在标签上直接写style
 
 ## 编程
 
