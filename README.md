@@ -120,4 +120,4 @@ const styles = StyleSheet.create({
 ![](./images/window-tool.png)
 使用手机Expo客户端开发工具扫描二维码
 
-![](./images/index-pic.png =100x20)
+![](./images/index-pic.png =250px)
