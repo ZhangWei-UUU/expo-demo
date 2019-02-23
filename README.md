@@ -121,5 +121,5 @@ const styles = StyleSheet.create({
 
 使用手机Expo客户端开发工具扫描二维码:
 <div>
-<img src="./images/index-pic.png" style="width:380;margin:0 auto"/>
+<img src="./images/index-pic.png" width="400"/>
 </div>
