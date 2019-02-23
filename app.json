@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "your app name",
+    "name": "物联数界",
     "slug": "test",
     "privacy": "public",
     "sdkVersion": "32.0.0",
@@ -8,7 +8,7 @@
       "ios",
       "android"
     ],
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "splash": {
@@ -23,7 +23,11 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+        "bundleIdentifier": "com.wushu.zw",
+        "supportsTablet": true
+      },
+    "android": {
+        "package": "com.wushu.zw"
     }
   }
 }

@@ -6,6 +6,7 @@ class HomeScreen extends Component {
   static navigationOptions = {
     header:null
   };
+  
 
   render() {
     return (
@@ -16,7 +17,8 @@ class HomeScreen extends Component {
                  <Text style={styles.logo}>工业物联</Text>
              </View>
              <View style={styles.line}>
-             <View style={styles.headerText} >
+             <View style={styles.headerText} 
+             onPress={() => this.props.navigation.navigate('Notifications')}>
               <Icon.AntDesign
                    name="scan1"
                    size={35}
