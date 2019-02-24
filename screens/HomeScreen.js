@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {ScrollView,Text,View,StyleSheet} from 'react-native';
+import {ScrollView,Text,View,StyleSheet,TouchableOpacity} from 'react-native';
 import { Icon } from 'expo';
 
 class HomeScreen extends Component {
@@ -17,15 +17,19 @@ class HomeScreen extends Component {
                  <Text style={styles.logo}>工业物联</Text>
              </View>
              <View style={styles.line}>
+           
              <View style={styles.headerText} 
-             onPress={() => this.props.navigation.navigate('Notifications')}>
-              <Icon.AntDesign
+             >
+               <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}>
+               <Icon.AntDesign
                    name="scan1"
                    size={35}
                    color="#fff"
                />
+                </TouchableOpacity>
                <Text style={{color:"#fff"}}>扫一扫</Text>
              </View>
+            
              <View style={styles.headerText} >
              <Icon.FontAwesome
                    name="qrcode"

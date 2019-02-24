@@ -1,7 +1,7 @@
-import React from 'react';
+import React,{Component} from 'react';
 import { ScrollView, StyleSheet,WebView } from 'react-native';
 
-export default class LinksScreen extends React.Component {
+export default class TestNavigator extends Component {
   static navigationOptions = {
     title: 'Links',
   };
