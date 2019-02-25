@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.86, maximum-scale=3.0, minimum-scale=0.86">
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <style>
+       body {
+         background: #e8e8e8;
+         width: 100%;
+         height: 100%;
+         overflow:scroll;
+       }
+       .card-container {
+            background: #fff;
+            border-radius: 12px;
+            text-align: center;
+            padding: 2px;
+            border:2px solid #999;
+            color: #999;
+        }
+
+  .tree-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    margin:10px auto;
+    background-size: cover;
+    position: relative;
+}
+
+.collapse-btn {
+    width: 30px;
+    height:30px;
+    font-size: 20px;
+    line-height: 23px;
+    border-radius: 30px;
+    border:2px solid #999;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    background: #fff;
+    text-align: center;
+}
+
+#size-panel {
+  position: fixed;
+  left: 5;
+  bottom: 5;
+  z-index: 100;
+}
+
+#size-panel button {
+  padding: 5px;
+  background: #fff;
+}
+
+#size-panel button {
+  padding: 5px;
+  background: #fff;
+}
+    </style>
+</head>
+
+<body>
+<div id="mountNode">
+</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script src="https://gw.alipayobjects.com/os/antv/pkg/_antv.g6-2.2.0/build/g6.js"></script>
+<script src="https://gw.alipayobjects.com/os/antv/assets/lib/jquery-3.2.1.min.js"></script>
+<script>
+document.addEventListener('message',(event)=>{
+   let data = JSON.parse(event.data)
+      
+    G6.registerNode("orgNode", {
+      anchor: [[0.5, 0.5], [1.5, 0.5]], //节点的锚定位置
+      draw: function(item){
+        const group = item.getGraphicGroup();
+        const {collapsed} = item.group.model;
+        let html;
+        if(collapsed && item.group.model.children && item.group.model.children.length>0){
+          html= G6.Util.createDOM(`
+            <div class="card-container">
+              <h5 class="main-text">${item.model.name}</h5>
+
+              <div class="collapse-btn">+</div>
+            </div>
+          `);
+        }else if(!collapsed && item.group.model.children && item.group.model.children.length>0){
+          html= G6.Util.createDOM(`
+            <div class="card-container">
+              <h5 class="main-text">${item.model.name}</h5>
+
+              <div class="collapse-btn">-</div>
+            </div>
+          `);
+        }else{
+          html= G6.Util.createDOM(`
+            <div class="card-container">
+              <h5 class="main-text">${item.model.name}</h5>
+
+            </div>
+          `);
+        }
+        return group.addShape("dom", {
+           attrs: {
+             x: 100,
+             y: 100,
+             width: 100,
+             height: 130,
+             html
+           }});
+       }
+     });
+     //自定义'smooth'节点之间连线
+    G6.registerEdge("custom-line-shape", {
+      getPath: function getPath(item) {
+        var points = item.getPoints();
+        var start = points[0];
+        var end = points[points.length - 1];
+        return [["M", start.x, start.y], ["L", start.x, end.y], ["L", end.x, end.y]];
+      }
+    });
+    //自定义树图布局
+    var layout = new G6.Layouts.CompactBoxTree({
+      direction: "TB", // 方向（LR/RL/H/TB/BT/V）
+      indent: 30, // 缩进量
+      getHGap: function getHGap() /* d */ {
+        // 横向间距
+        return 50;
+      },
+      getVGap: function getVGap() /* d */ {
+        // 竖向间距
+        return 50;
+      }
+    });
+ let height = 1000;
+    // 1.初始化一个树状结构
+  var tree = new G6.Tree({
+    id: "mountNode", // 容器ID
+    height: height, // 画布高
+    width:500,
+    layout: layout,   //自定义布局
+    fitView: "autoZoom", // 自动缩放
+    renderer: "svg", //在默认情况下是canvas，常用于默认react circle，但是如果是自定义需设置为SVG
+  });
+
+  // 2.定义树状组件
+  tree.node({
+    shape: "orgNode", //自定义节点名称
+  });
+
+  //连线形状
+  tree.edge({
+    shape: "custom-line-shape",
+  });
+
+  //通过数据渲染出树图
+  tree.read({
+    roots: [data],
+  });
+
+  let lastPoint;
+
+   //树状图拖拽
+   tree.on("drag", ev => {
+     if (lastPoint) {
+       tree.translate(ev.domX - lastPoint.x, ev.domY - lastPoint.y);
+     }
+     lastPoint = {
+       x: ev.domX,
+       y: ev.domY
+     };
+   });
+
+
+   tree.on("node:click",(e)=>{
+      const { collapsed } = e.item.getModel();
+      if( collapsed){
+        tree.update(e.item, {
+            collapsed: false,
+        });
+      }else{
+      tree.update(e.item, {
+          collapsed: true,
+      });
+    }
+  });
+  })
+</script>
+</html>

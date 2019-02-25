@@ -2,12 +2,12 @@ import React,{Component} from 'react';
 import {Text,View} from 'react-native';
 class LoginScreen extends Component {
   static navigationOptions = {
-    title: '登录',
+    title: '指纹案例',
   };
 
   render() {
     return <View>
-        <Text>登录</Text>
+        <Text>指纹</Text>
     </View>;
   }
 }

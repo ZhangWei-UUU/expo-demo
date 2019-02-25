@@ -6,11 +6,23 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LoginScreen from '../screens/LoginScreen';
+import ScannerScreen from '../screens/ScannerScreen';
+import CameraScreen from '../screens/CameraScreen';
+import LocationScreen from '../screens/LocationScreen';
+import FingerprintScreen from '../screens/FingerprintScreen';
+import WebpageScreen from '../screens/WebpageScreen';
+import QrScreen from '../screens/QrScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
+  Webpage:WebpageScreen,
+  Scanner:ScannerScreen,
+  Camera:CameraScreen,
+  Fingerprint:FingerprintScreen,
+  Qrcode:QrScreen,
+  Location:LocationScreen,
   Login:LoginScreen,  //在这个键值对中 Login会以字符串形式作为参数让其他函数进行调用。
 },
 {
