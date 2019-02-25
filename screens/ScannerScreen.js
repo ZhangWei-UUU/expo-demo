@@ -22,6 +22,9 @@ class ScannerScreen extends Component {
   handleBarCodeScanned = ({ type, data }) => {
       //在扫描之后就输出相应信息
       console.log(type,data)
+      if(data){
+        this.props.navigation.navigate('Qrcode')
+      }
   }
     render() {
         const { hasCameraPermission } = this.state;

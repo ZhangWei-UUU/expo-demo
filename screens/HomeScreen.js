@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {ScrollView,Text,View,StyleSheet,TouchableOpacity,FlatList} from 'react-native';
+import {ScrollView,Text,View,StyleSheet,TouchableOpacity,FlatList,TextInput} from 'react-native';
 import { Icon } from 'expo';
 import {HEADER_MENU,MENU} from '../constants/Menu';
 
@@ -20,19 +20,36 @@ class HomeScreen extends Component {
 
   render() {
     return (
-      <View>
+      <View style={{backgroundColor:"#e8e8e8"}}>
         <ScrollView >
            <View style={styles.header}>
-             <View>
-                <Text style={styles.logo}>呆萌</Text>
+             <View style={{flex: 1,justifyContent: 'space-evenly',
+             flexDirection: 'row',flexWrap: 'wrap',height:100,marginBottom:80}}>
+                <View style={{width:"70%",paddingLeft:30,paddingTop:50}}>
+                    <Text style={{color:"#000",fontSize:35}}>您想查询哪个</Text>
+                    <Text style={{color:"#000",fontSize:35}}>商品？</Text>
+                </View>
+                <View style={{width:"30%"}}>
+                    <Text>头像</Text>
+                </View>
+             </View>
+             <View style={{alignItems:"center"}}>
+             <TextInput style={{
+                 backgroundColor: '#F7F7F7',
+                 height: 36,
+                 fontSize: 18,
+                 borderWidth: 1,
+                 borderColor: '#ccc',
+                 width:'85%'
+             }}/>
              </View>
              <View style={styles.line}>
              {HEADER_MENU.map((obj,key)=>{
                  return(
                     <View style={styles.headerIcon} key={key}>
                         <TouchableOpacity onPress={() => this.props.navigation.navigate(obj.location)} style={{alignItems: 'center'}}>
-                           <Ionicons name={obj.icon} size={35} color="#fff"/>
-                           <Text style={{color:"#fff"}}>{obj.title}</Text>
+                           <Ionicons name={obj.icon} size={35}/>
+                           <Text>{obj.title}</Text>
                         </TouchableOpacity>
                     </View>
                  )
@@ -66,15 +83,8 @@ class HomeScreen extends Component {
 const styles = StyleSheet.create({
     header: {
       paddingTop:30,
-      height:170,
-      backgroundColor: '#3a7ef3',    
-    },
-    logo:{
-        color:"#fff",
-        fontSize:30,
-        alignItems:"center",
-        textAlign:"center",
-        marginBottom:25
+      height:370,
+      backgroundColor: '#fff',    
     },
     line:{
         flex: 1,

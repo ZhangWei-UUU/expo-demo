@@ -77,7 +77,11 @@
 <script>
 document.addEventListener('message',(event)=>{
    let data = JSON.parse(event.data)
-      
+    
+    function add(e) {
+        event.preventDefault();
+        alert("xxx")
+    }
     G6.registerNode("orgNode", {
       anchor: [[0.5, 0.5], [1.5, 0.5]], //节点的锚定位置
       draw: function(item){
@@ -87,23 +91,28 @@ document.addEventListener('message',(event)=>{
         if(collapsed && item.group.model.children && item.group.model.children.length>0){
           html= G6.Util.createDOM(`
             <div class="card-container">
-              <h5 class="main-text">${item.model.name}</h5>
-
-              <div class="collapse-btn">+</div>
+              <h2 class="main-text">
+                ${item.model.name}
+              </h2>
+              <div class="collapse-btn" onclick="this.add">+</div>
             </div>
           `);
         }else if(!collapsed && item.group.model.children && item.group.model.children.length>0){
           html= G6.Util.createDOM(`
             <div class="card-container">
-              <h5 class="main-text">${item.model.name}</h5>
+              <h2 class="main-text">
+              ${item.model.name}
+              </h2>
 
-              <div class="collapse-btn">-</div>
+              <div class="collapse-btn" onclick="this.add">-</div>
             </div>
           `);
         }else{
           html= G6.Util.createDOM(`
             <div class="card-container">
-              <h5 class="main-text">${item.model.name}</h5>
+              <h5 class="main-text">
+              ${item.model.name}
+              </h5>
 
             </div>
           `);
@@ -178,20 +187,23 @@ document.addEventListener('message',(event)=>{
        y: ev.domY
      };
    });
-
-
+   
    tree.on("node:click",(e)=>{
-      const { collapsed } = e.item.getModel();
-      if( collapsed){
-        tree.update(e.item, {
-            collapsed: false,
-        });
-      }else{
-      tree.update(e.item, {
-          collapsed: true,
-      });
-    }
-  });
+       alert("进入详情页面")
+   })
+
+   //tree.on("node:click",(e)=>{
+     // const { collapsed } = e.item.getModel();
+     // if( collapsed){
+      //  tree.update(e.item, {
+      //      collapsed: false,
+     //   });
+     // }else{
+     // tree.update(e.item, {
+     //     collapsed: true,
+     // });
+    //}
+  //});
   })
 </script>
 </html>

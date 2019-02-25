@@ -17,6 +17,7 @@
     "expo": "^32.0.0",
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
+    "react-native-barcode-builder": "1.0.5",
     "react-native-qrcode": "0.2.7",
     "react-navigation": "^3.0.9"
   },
