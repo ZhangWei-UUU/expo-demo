@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {ScrollView,Text,View,StyleSheet,TouchableOpacity,FlatList,TextInput,Image,SafeAreaView} from 'react-native';
+import {ScrollView,Text,View,StyleSheet,TouchableOpacity,FlatList,TextInput,Image,SafeAreaView,AsyncStorage} from 'react-native';
 import { Icon } from 'expo';
 import MaterialTabs from 'react-native-material-tabs';
 
@@ -13,7 +13,7 @@ class HomeScreen extends Component {
   constructor(props){
       super(props);
       this.state ={
-           rencent:[] ,
+           history:[] ,
            selectedTab: 0,
       }
   }
@@ -21,8 +21,20 @@ class HomeScreen extends Component {
   setTab = selectedTab => {
     this.setState({ selectedTab });
   };
+
+  async componentDidMount(){
+    try {
+       const value = await AsyncStorage.getItem('record');
+       if(value !== null){
+           this.setState({
+               history:JSON.parse(value)
+           })
+       }
+    }catch(e){
+       alert("获取历史数据失败.")
+    }
+  }
   render() {
-    
     return (
       <View style={{backgroundColor:"#e8e8e8"}}>
         <ScrollView >
@@ -39,10 +51,12 @@ class HomeScreen extends Component {
                 </View>
              </View>
              <View style={{alignItems:"center"}}>
-             <TextInput style={{
+             <TextInput 
+             placeholder="在此输入商品编号"
+             style={{
                  backgroundColor: '#F7F7F7',
                  height: 36,
-                 fontSize: 18,
+                 fontSize: 15,
                  borderWidth: 1,
                  borderColor: '#ccc',
                  width:'85%',
@@ -95,16 +109,31 @@ class HomeScreen extends Component {
                 {this.state.selectedTab===0?<View>
                     <FlatList
                         contentContainerStyle={{alignItems: 'center',paddingTops:20}}
-                        data={[{key: 'a'}, {key: 'b'}]}
+                        data={this.state.history}
+                        keyExtractor={(item, index) => index.toString()}
                         renderItem={({item}) => {
                             return(
-                                <TouchableOpacity onPress={() => this.props.navigation.navigate("Qrcode",{key:item.key})}> 
-                                   <View style={styles.card}><Text>{item.key}</Text></View>
+                                <TouchableOpacity 
+                                onPress={() => this.props.navigation.navigate("Qrcode",{obj:item})}> 
+                                   <View style={styles.card}>
+                                     <View style={{width:"40%",alignItems:"center"}}>
+                                        <Image source={{uri:item.handleMeta.thumbnail.url}} 
+                                           style={styles.productImage}/>
+                                        </View>
+                                     <View style={{width:"60%"}}>
+                                       <Text>{item.handleMeta.name}</Text>
+                                       <Text style={styles.smFont}>{item.handleMeta.id}</Text>
+                                       <Text style={styles.smFont}>生产商：{item.handleMeta.producer}</Text>
+                                       <Text style={styles.smFont}>生产地：{item.handleMeta.area}</Text>
+                                       <Text style={styles.smFont}>生产时间：{item.handleMeta.produceDate}</Text>
+                                     </View>
+                                     
+                                   </View>
                                </TouchableOpacity>
                             )
                         }}
                      />
-                </View>: <Text>暂无相关信息</Text>}
+                </View>: <Text style={{textAlign:"center"}}>暂无相关信息</Text>}
             </SafeAreaView>     
         </ScrollView>
       </View>
@@ -158,7 +187,12 @@ const styles = StyleSheet.create({
         height:120,
         backgroundColor:"#fff",
         marginBottom:5,
-        marginTop:5
+        marginTop:5,
+        flex: 1,
+        justifyContent: 'space-evenly',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        paddingTop:10
     },
     headerImage: {
         width:40,
@@ -168,5 +202,15 @@ const styles = StyleSheet.create({
         marginTop: 50,
         marginLeft:10
     },
+    productImage:{
+        width:70,
+        height: 70,
+        resizeMode: 'contain',
+        marginTop:10
+    },
+    smFont:{
+        fontSize:12,
+        color:"#999"
+    }
   });
 export default HomeScreen
