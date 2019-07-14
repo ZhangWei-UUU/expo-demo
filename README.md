@@ -130,3 +130,5 @@ const styles = StyleSheet.create({
 1. [自定义ICON和SLASH](./wiki/iconslash.md)
 2. [解构路由](./wiki/navigator.md)
 3. [打包构建](./wiki/build.md)
+
+## Guild加入开源项目
