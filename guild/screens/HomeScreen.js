@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { BoxShadow } from 'react-native-shadow';
-
+import DoubleClick from 'react-native-double-click';
 import Swiper from 'react-native-swiper-animated';
 import { styles } from '../styles/deck';
 
@@ -85,11 +85,13 @@ export default class Home extends PureComponent {
         >
           {this.state.items.map((item, key) => (
             <View style={styles.card} key={key}>
-              <BoxShadow setting={shadowOpt} >
-                <TouchableOpacity onPress={(e, key) => this.jump(e, 1)}>
+              <DoubleClick onClick={(e, key) => this.jump(e, 1)}>
+                <BoxShadow setting={shadowOpt} >
+
                   <Image source={item.src} style={styles.img} />
-                </TouchableOpacity>
-              </BoxShadow>
+
+                </BoxShadow>
+              </DoubleClick>
             </View>
           ))}
         </Swiper>
