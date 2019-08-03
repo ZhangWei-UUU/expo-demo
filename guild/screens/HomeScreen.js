@@ -8,6 +8,8 @@ import {
 import { BoxShadow } from 'react-native-shadow';
 import DoubleClick from 'react-native-double-click';
 import Swiper from 'react-native-swiper-animated';
+import { BackHandler } from "react-native";
+
 import { styles } from '../styles/deck';
 
 const shadowOpt = {
@@ -24,10 +26,6 @@ const shadowOpt = {
 
 
 export default class Home extends PureComponent {
-  static navigationOptions = {
-    header: null,
-  };
-
   constructor(props) {
     super(props);
     this.state = {
@@ -64,10 +62,22 @@ export default class Home extends PureComponent {
     })
   }
 
-  jump = (e, key) => {
-    console.log(key);
-    this.props.navigation.push('Content')
+  componentDidMount() {
+    BackHandler.addEventListener("hardwareBackPress", this.onBackPress);
   }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener("hardwareBackPress", this.onBackPress);
+  }
+
+  jump = (e, key) => {
+    this.props.navigation.navigate('Content')
+  }
+
+  onBackPress = () => {
+    this.props.navigation.pop()
+  }
+
 
   render() {
     return (

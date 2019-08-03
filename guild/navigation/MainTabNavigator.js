@@ -22,7 +22,10 @@ const HomeStack = createStackNavigator(
     Home: HomeScreen,
     Content: ContentScreen
   },
-  config
+  {
+    initialRouteName: "Home",
+    headerMode: 'none',
+  }
 );
 // 栈集合的配置：1. 文字，2.图标
 HomeStack.navigationOptions = {
