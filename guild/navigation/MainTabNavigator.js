@@ -5,7 +5,6 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
-import CardsScreen from '../screens/CardsScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import ContentScreen from '../screens/ContentScreen';
 
@@ -52,32 +51,13 @@ const LinksStack = createStackNavigator(
 );
 
 LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
+  tabBarLabel: 'VIP',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
   )
 };
 
 LinksStack.path = '';
-
-const CardsStack = createStackNavigator(
-  {
-    Links: CardsScreen,
-  },
-  config
-);
-
-CardsStack.navigationOptions = {
-  tabBarLabel: '卡片',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused}
-      name={Platform.OS === 'ios' ?
-        'ios-link' : 'md-car'} />
-  ),
-};
-
-CardsStack.path = '';
-
 
 const SettingsStack = createStackNavigator(
   {
@@ -87,7 +67,7 @@ const SettingsStack = createStackNavigator(
 );
 
 SettingsStack.navigationOptions = {
-  tabBarLabel: '我的',
+  tabBarLabel: '我',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -100,7 +80,6 @@ SettingsStack.path = '';
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
   LinksStack,
-  CardsStack,
   SettingsStack,
 });
 

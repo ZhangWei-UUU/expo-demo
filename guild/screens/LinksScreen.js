@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { View, Text, BackHandler } from 'react-native';
+import { ScrollView, View, Image, Text } from 'react-native';
 import Swiper from 'react-native-swiper';
-// 1.5.9
+import { BackHandler } from "react-native";
+import { styles } from '../styles/vip';
 
-class WelcomeScreen extends Component {
+class VipScreen extends Component {
   static navigationOptions = {
     header: null,
 
@@ -34,59 +35,46 @@ class WelcomeScreen extends Component {
 
   render() {
     return (
-      <Swiper
-        style={styles.wrapper}
-        //                showsButtons
-        //                removeClippedSubviews={false}
-        dotStyle={styles.dotStyle}
-        loop={false}
-        activeDotStyle={styles.activeDotStyle}>
-        <View style={styles.slide1}>
-          <Text style={styles.text}>asdasdr</Text>
+      <ScrollView style={{ flex: 1 }}>
+        <View style={styles.header}>
+          <Image source={require('../assets/images/sendCoin.jpg')} style={styles.headerImage} />
         </View>
-        <View style={styles.slide2}>
-          <Text style={styles.text}>Beautiful</Text>
+        <View
+          style={{
+            flex: 1,
+            flexDirection: 'row',
+            justifyContent: 'center',
+            alignItems: 'stretch',
+          }}>
+          <View style={styles.magazineWrapper}>
+            <Image source={require('../assets/images/caixin-1.jpg')} style={styles.magazine} />
+          </View>
+          <View style={styles.magazineTextWrapper} >
+            <Text style={styles.title}>人民币"破七"之殇</Text>
+            <Text>受单边主义和贸易保护主义措施及对中国加征关税预期等影响，今日人民币对美元汇率有所贬值，
+              突破了7元，但人民币对一篮子货币继续保持稳定和强势，这是市场供求和国际汇市波动的反映。
+</Text>
+          </View>
         </View>
-        <View style={styles.slide3}>
-          <Text style={styles.text}>And simple</Text>
-
+        <View
+          style={{
+            flex: 1,
+            flexDirection: 'row',
+            justifyContent: 'center',
+            alignItems: 'stretch',
+          }}>
+          <View style={styles.magazineWrapper}>
+            <Image source={require('../assets/images/economic.jpg')} style={styles.magazine} />
+          </View>
+          <View style={styles.magazineTextWrapper} >
+            <Text style={styles.title}>《经济学人》：比特币资产</Text>
+            <Text>谈到比特币，一定会有两种声音：一类是拥护者，他们预测比特币就是互联网时代的通用货币，甚至有着取代现有货币的趋势；而另一类则是批评者，将它和17世纪荷兰的郁金香事件类比，认为不过是疯狂投机的假象。
+</Text>
+          </View>
         </View>
-      </Swiper>
+      </ScrollView>
     );
   }
 }
 
-const styles = {
-  dotStyle: {
-    backgroundColor: 'rgba(255, 255, 255, 0.48)',
-  },
-  activeDotStyle: {
-    backgroundColor: 'white',
-  },
-  wrapper: {},
-  slide1: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#5c77a9',
-  },
-  slide2: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#5ca1a9',
-  },
-  slide3: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#69a95c',
-  },
-  text: {
-    color: '#fff',
-    fontSize: 30,
-    fontWeight: 'bold',
-  },
-};
-
-export default WelcomeScreen;
+export default VipScreen;

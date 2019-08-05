@@ -2,27 +2,17 @@ import React, { PureComponent } from 'react';
 import {
   Text,
   View,
+  Alert,
   Image,
   TouchableOpacity,
 } from 'react-native';
-import { BoxShadow } from 'react-native-shadow';
+import { Ionicons } from '@expo/vector-icons';
 import DoubleClick from 'react-native-double-click';
 import Swiper from 'react-native-swiper-animated';
 import { BackHandler } from "react-native";
 
 import { styles } from '../styles/deck';
 
-const shadowOpt = {
-  height: 500,
-  width: 300,
-  color: "#000",
-  border: 8,
-  radius: 8,
-  opacity: 0.1,
-  x: 3,
-  y: 3,
-  style: { marginVertical: -10 },
-}
 
 
 export default class Home extends PureComponent {
@@ -30,48 +20,56 @@ export default class Home extends PureComponent {
     super(props);
     this.state = {
       items: [
-        { src: require("../assets/images/test-1.png") },
-        { src: require("../assets/images/test-4.png") },
-        { src: require("../assets/images/test-2.png") },
-        { src: require("../assets/images/test-3.png") },
-        { src: require("../assets/images/test-11.png") },
-        { src: require("../assets/images/test-12.png") },
+
       ]
     }
   }
 
   swiper = null;
 
-  // prev = () => {
-  //   this.swiper.forceLeftSwipe();
-  // }
+  prev = () => {
+    this.swiper.forceLeftSwipe();
+  }
 
-  // next = () => {
-  //   this.swiper.forceRightSwipe();
-  // }
+  next = () => {
+    this.swiper.forceRightSwipe();
+  }
+
+  fetchDataFromServer = () => {
+    fetch('https://polkadot.cloud-wave.cn/read?collection=articals')
+      .then(response => response.json())
+      .then(responseJson => {
+        if (responseJson.success) {
+          this.setState({
+            items: responseJson.result
+          })
+        } else {
+          Alert.alert("请检查您的网络是否通畅")
+        }
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
+
 
   change = () => {
     this.swiper.jumpToIndex(0);
-    this.setState({
-      items: [
-        { src: require("../assets/images/test-11.png") },
-        { src: require("../assets/images/test-12.png") },
-        { src: require("../assets/images/test-2.png") },
-        { src: require("../assets/images/test-3.png") },
-      ]
-    })
+    this.fetchDataFromServer();
   }
 
-  componentDidMount() {
+  async componentDidMount() {
+    this.fetchDataFromServer();
     BackHandler.addEventListener("hardwareBackPress", this.onBackPress);
+
   }
 
   componentWillUnmount() {
     BackHandler.removeEventListener("hardwareBackPress", this.onBackPress);
   }
 
-  jump = (e, key) => {
-    this.props.navigation.navigate('Content')
+  jump = (e, id) => {
+    this.props.navigation.navigate('Content', { id: id })
   }
 
   onBackPress = () => {
@@ -94,20 +92,20 @@ export default class Home extends PureComponent {
           paginationRight={''}
         >
           {this.state.items.map((item, key) => (
-            <View style={styles.card} key={key}>
-              <DoubleClick onClick={(e, key) => this.jump(e, 1)}>
-                <BoxShadow setting={shadowOpt} >
-
-                  <Image source={item.src} style={styles.img} />
-
-                </BoxShadow>
-              </DoubleClick>
-            </View>
+            <DoubleClick onClick={(e, key) => this.jump(e, item.id)} key={key}>
+              <Image source={{ uri: `https://${item.cover}` }} style={styles.img} />
+            </DoubleClick>
           ))}
         </Swiper>
         <View style={styles.buttonContainer}>
+          <TouchableOpacity onPress={this.prev} style={styles.btn}>
+            <Ionicons name="md-arrow-dropleft" size={32} />
+          </TouchableOpacity>
           <TouchableOpacity onPress={this.change} style={styles.btn}>
             <Text style={styles.btnText}>换一批</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={this.next} style={styles.btn}>
+            <Ionicons name="md-arrow-dropright" size={32} />
           </TouchableOpacity>
         </View>
       </View >

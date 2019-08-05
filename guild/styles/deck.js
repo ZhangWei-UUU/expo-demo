@@ -5,18 +5,13 @@ export const styles = StyleSheet.create({
     backgroundColor: '#fff',
     flex: 1,
   },
-  card: {
-    borderRadius: 10,
-    width: 300,
-    height: 500,
-    backgroundColor: '#fff',
-    marginTop: 30,
-    marginLeft: 30
-  },
   img: {
+    marginTop: 60,
+    marginLeft: 30,
     borderRadius: 10,
     width: 300,
-    height: 500,
+    height: 450,
+
   },
   text: {
     color: '#ccc',
