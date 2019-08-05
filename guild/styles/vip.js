@@ -1,5 +1,4 @@
 import { StyleSheet, Dimensions } from 'react-native';
-import { bold } from 'ansi-colors';
 
 export const styles = StyleSheet.create({
   header: {

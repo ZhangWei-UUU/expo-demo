@@ -45,6 +45,9 @@ class VipScreen extends Component {
             flexDirection: 'row',
             justifyContent: 'center',
             alignItems: 'stretch',
+            borderBottomWidth: 1,
+            borderBottomColor: "#e8e8e8",
+            marginBottom: 20
           }}>
           <View style={styles.magazineWrapper}>
             <Image source={require('../assets/images/caixin-1.jpg')} style={styles.magazine} />
@@ -62,6 +65,7 @@ class VipScreen extends Component {
             flexDirection: 'row',
             justifyContent: 'center',
             alignItems: 'stretch',
+
           }}>
           <View style={styles.magazineWrapper}>
             <Image source={require('../assets/images/economic.jpg')} style={styles.magazine} />
