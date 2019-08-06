@@ -1,12 +1,11 @@
-import { Platform, StyleSheet } from 'react-native';
-
+import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
   wrapper: {
     backgroundColor: '#fff',
     flex: 1,
   },
   img: {
-    marginTop: 60,
+    marginTop: 20,
     marginLeft: 30,
     borderRadius: 10,
     width: 300,

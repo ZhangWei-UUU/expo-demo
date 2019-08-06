@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Text, ScrollView, View, Dimensions } from 'react-native';
 import HTML from 'react-native-render-html';
+import { BackHandler } from "react-native";
 
 
 class ContentScreen extends Component {
@@ -17,10 +18,19 @@ class ContentScreen extends Component {
     this.setState({
       id
     });
-    this.fetchDataFromServer(id)
+    this.fetchDataFromServer(id);
+    this.backHandler = BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
+
   }
 
+  componentWillUnmount() {
+    this.backHandler.remove()
+  }
 
+  handleBackPress = () => {
+    this.props.navigation.goBack()
+    return true;
+  }
 
   fetchDataFromServer = (id) => {
     fetch(`https://polkadot.cloud-wave.cn/read/${id}?collection=articals`)

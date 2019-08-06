@@ -1,10 +1,12 @@
 import React, { PureComponent } from 'react';
+
 import {
   Text,
   View,
   Alert,
   Image,
   TouchableOpacity,
+  StatusBar
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import DoubleClick from 'react-native-double-click';
@@ -80,6 +82,10 @@ export default class Home extends PureComponent {
   render() {
     return (
       <View style={{ flex: 1 }}>
+        <StatusBar
+          backgroundColor="#fff"
+          barStyle="dark-content" // Here is where you change the font-color
+        />
         <Swiper
           ref={(swiper) => {
             this.swiper = swiper;

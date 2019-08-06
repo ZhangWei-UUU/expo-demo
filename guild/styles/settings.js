@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
     backgroundColor: "#e8e8e8"
   },
   Header: {
-    height: 150,
+    height: 220,
     padding: 30,
     marginBottom: 10,
     backgroundColor: "#fff",
@@ -17,11 +17,14 @@ export const styles = StyleSheet.create({
   grayText: {
     color: "#ccc"
   },
+  barIcon: {
+    width: Dimensions.get('window').width * 0.1,
+  },
   barLeft: {
-    width: Dimensions.get('window').width * 0.5,
+    width: Dimensions.get('window').width * 0.3,
   },
   barRight: {
-    width: Dimensions.get('window').width * 0.4,
+    width: Dimensions.get('window').width * 0.5,
     alignItems: 'flex-end',
   },
   card: {

@@ -1,6 +1,12 @@
 import { StyleSheet, Dimensions } from 'react-native';
 
 export const styles = StyleSheet.create({
+
+  body: {
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height,
+    backgroundColor: "#e8e8e8"
+  },
   header: {
     padding: 20
   },
@@ -8,6 +14,7 @@ export const styles = StyleSheet.create({
     width: Dimensions.get('window').width - 40,
     height: 210,
     borderRadius: 12,
+    marginTop: 20
   },
   magazineWrapper: {
     width: Dimensions.get('window').width * 0.4,

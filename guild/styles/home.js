@@ -5,6 +5,7 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+    barStyle: "#000"
   },
 
   developmentModeText: {

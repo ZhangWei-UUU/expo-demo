@@ -47,13 +47,15 @@ const LinksStack = createStackNavigator(
   {
     Links: LinksScreen,
   },
-  config
+  {
+    headerMode: 'none',
+  }
 );
 
 LinksStack.navigationOptions = {
   tabBarLabel: 'VIP',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-ribbon'} />
   )
 };
 
@@ -63,7 +65,9 @@ const SettingsStack = createStackNavigator(
   {
     Settings: SettingsScreen,
   },
-  config
+  {
+    headerMode: 'none',
+  }
 );
 
 SettingsStack.navigationOptions = {
