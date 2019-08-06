@@ -12,7 +12,7 @@ import AccountScreen from '../screens/AccountScreen';
 import RevenueScreen from '../screens/RevenueScreen';
 import ResearchScreen from '../screens/ResearchScreen';
 import PhoneScreen from '../screens/PhoneScreen';
-
+import LineTrendScreen from '../screens/LineTrendScreen';
 /**
  * 首页栈堆的实现
  */
@@ -67,6 +67,7 @@ const SettingsStack = createStackNavigator(
     Login: LoginScreen,
     Phone: PhoneScreen,
     Account: AccountScreen,
+    LineTrend: LineTrendScreen,
     Revenue: RevenueScreen,
     Research: ResearchScreen
   },

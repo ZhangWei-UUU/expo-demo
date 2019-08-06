@@ -109,33 +109,43 @@ class SettingsScreen extends Component {
             </View>
           </View>
           <View style={styles.card}>
-            <View style={styles.cardBar}>
-              <Ionicons name="md-paper" size={24} color="#72d658" style={styles.barIcon} />
-              <View style={styles.barLeft}>
-                <Text>研报</Text>
+            <TouchableOpacity onPress={() => this._jump("Account")}>
+
+              <View style={styles.cardBar}>
+                <Ionicons name="md-paper" size={24} color="#72d658" style={styles.barIcon} />
+                <View style={styles.barLeft}>
+                  <Text>研报</Text>
+                </View>
+                <View style={styles.barRight}>
+                  <Text style={styles.Num}></Text>
+                </View>
               </View>
-              <View style={styles.barRight}>
-                <Text style={styles.Num}></Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => this._jump("LineTrend")}>
+
+              <View style={styles.cardBar}>
+                <Ionicons name="md-pie" size={24} color="#46db97" style={styles.barIcon} />
+                <View style={styles.barLeft}>
+                  <Text>数据分析</Text>
+                </View>
+                <View style={styles.barRight}>
+                  <Text style={styles.Num}></Text>
+                </View>
               </View>
-            </View>
-            <View style={styles.cardBar}>
-              <Ionicons name="md-pie" size={24} color="#46db97" style={styles.barIcon} />
-              <View style={styles.barLeft}>
-                <Text>数据分析</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => this._jump("Account")}>
+
+              <View style={styles.cardBar}>
+                <Ionicons name="md-settings" size={24} color="gray" style={styles.barIcon} />
+                <View style={styles.barLeft}>
+                  <Text>设置</Text>
+                </View>
+                <View style={styles.barRight}>
+                  <Text style={styles.Num}></Text>
+                </View>
               </View>
-              <View style={styles.barRight}>
-                <Text style={styles.Num}></Text>
-              </View>
-            </View>
-            <View style={styles.cardBar}>
-              <Ionicons name="md-settings" size={24} color="gray" style={styles.barIcon} />
-              <View style={styles.barLeft}>
-                <Text>设置</Text>
-              </View>
-              <View style={styles.barRight}>
-                <Text style={styles.Num}></Text>
-              </View>
-            </View>
+            </TouchableOpacity>
+
           </View>
           {userName ? <View style={styles.card}>
             <View style={{ alignItems: "center" }}>
