@@ -1,5 +1,5 @@
 import React, { Component, createRef } from 'react';
-import { Text, View, TextInput, Button, Alert, AsyncStorage } from 'react-native';
+import { Text, View, DeviceEventEmitter, Alert, AsyncStorage } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import CustomTopBar from '../components/TopBar';
 import CodeInput from 'react-native-confirmation-code-field';
@@ -38,10 +38,13 @@ class LoginScreen extends Component {
     }
   };
 
+  refresh = () => {
+
+  }
   onFinishCheckingCode = code => {
     if (code === '123456') {
       this._storeData("张伟", { account: 10000, order: 12 });
-      this.props.navigation.goBack('id-1565086603522-4');
+      this.props.navigation.navigate('Settings', { refresh: this.refresh() });
     } else {
       Alert.alert('验证码未通过', '请检查您的验证码是否输入正确!', [{ text: 'OK' }], {
         cancelable: false,
@@ -60,6 +63,10 @@ class LoginScreen extends Component {
     setTimeout(() => {
       Alert.alert("验证码：123456")
     }, 2000)
+  }
+
+  componentWillUnmount() {
+    DeviceEventEmitter.emit('BackToLogin', { login: true });
   }
   render() {
     return (

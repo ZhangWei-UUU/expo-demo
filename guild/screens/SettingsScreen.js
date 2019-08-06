@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, View, Text, TouchableOpacity, AsyncStorage, Alert } from 'react-native';
+import { ScrollView, View, Text, TouchableOpacity, AsyncStorage, Alert, DeviceEventEmitter } from 'react-native';
 import { styles } from '../styles/settings';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -16,16 +16,43 @@ class SettingsScreen extends Component {
   }
 
   async componentDidMount() {
+    var self = this;
+    this.listener = DeviceEventEmitter.addListener('BackToLogin', async (url) => {
+      let userName = await AsyncStorage.getItem('userName');
+      self.setState({
+        userName: userName
+      });
+    });
     try {
       let userName = await AsyncStorage.getItem('userName');
       this.setState({
-        userName
+        userName: userName,
+        refresh: false
       })
     } catch (error) {
       console.error("获取本地存储错误")
     }
-
   }
+
+  componentWillUnmount() {
+    this.listener.remove();
+  }
+
+  // async componentDidUpdate(preProps, preState) {
+
+  //   try {
+  //     let userName = await AsyncStorage.getItem('userName');
+  //     console.log("update", userName, preState.userName)
+  //     if (userName !== preState.userName) {
+  //       this.setState({
+  //         userName
+  //       })
+  //     }
+
+  //   } catch (error) {
+  //     console.error("获取本地存储错误")
+  //   }
+  // }
   // 退出登录
   _logout = async () => {
     try {

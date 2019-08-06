@@ -76,9 +76,8 @@ const SettingsStack = createStackNavigator(
 );
 
 SettingsStack.navigationOptions = ({ navigation }) => {
-  console.log(navigation)
   let tabBarVisible = true;
-  if (navigation.state.index > 0) {
+  if (navigation.state.index === 1 || navigation.state.index === 2) {
     tabBarVisible = false;
   }
   return {
