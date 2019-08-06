@@ -2,7 +2,14 @@ import React, { Component } from 'react';
 import { Text, ScrollView, View, Dimensions } from 'react-native';
 import HTML from 'react-native-render-html';
 import { BackHandler } from "react-native";
-
+let tagsStyles = { p: { marginBottom: 2, marginTop: 2 }, code: { color: "red", fontWeight: "bold" } }
+let classesStyles = {
+  "ql-syntax": {
+    color: "#999",
+    fontStyle: 'italic',
+    fontWeight: "bold"
+  }
+}
 
 class ContentScreen extends Component {
   constructor(props) {
@@ -51,8 +58,7 @@ class ContentScreen extends Component {
 
   render() {
     let { result } = this.state;
-
-    let tagsStyles = { p: { marginBottom: 2, marginTop: 2 } }
+    console.log(result.content)
     return (
       <View>
         <View style={{ height: 22, backgroundColor: "#ccc" }}></View>
@@ -66,6 +72,7 @@ class ContentScreen extends Component {
               {result.content ?
                 <HTML html={result.content}
                   tagsStyles={tagsStyles}
+                  classesStyles={classesStyles}
                 /> : null}
             </View>
           </ScrollView>
