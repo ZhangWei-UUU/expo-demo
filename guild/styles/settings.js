@@ -17,6 +17,9 @@ export const styles = StyleSheet.create({
   grayText: {
     color: "#ccc"
   },
+  blackText: {
+    color: "#000"
+  },
   barIcon: {
     width: Dimensions.get('window').width * 0.1,
   },

@@ -11,11 +11,7 @@ import LoginScreen from '../screens/LoginScreen';
 import AccountScreen from '../screens/AccountScreen';
 import RevenueScreen from '../screens/RevenueScreen';
 import ResearchScreen from '../screens/ResearchScreen';
-
-const config = Platform.select({
-  web: { headerMode: 'screen' },
-  default: {},
-});
+import PhoneScreen from '../screens/PhoneScreen';
 
 /**
  * 首页栈堆的实现
@@ -69,6 +65,7 @@ const SettingsStack = createStackNavigator(
   {
     Settings: SettingsScreen,
     Login: LoginScreen,
+    Phone: PhoneScreen,
     Account: AccountScreen,
     Revenue: RevenueScreen,
     Research: ResearchScreen
@@ -78,16 +75,24 @@ const SettingsStack = createStackNavigator(
   }
 );
 
-SettingsStack.navigationOptions = {
-  tabBarLabel: '我',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
-  ),
+SettingsStack.navigationOptions = ({ navigation }) => {
+  console.log(navigation)
+  let tabBarVisible = true;
+  if (navigation.state.index > 0) {
+    tabBarVisible = false;
+  }
+  return {
+    tabBarVisible,
+    tabBarLabel: '我',
+    tabBarIcon: ({ focused }) => (
+      <TabBarIcon
+        focused={focused}
+        name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
+    ),
+  };
 };
-
 SettingsStack.path = '';
+
 
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
