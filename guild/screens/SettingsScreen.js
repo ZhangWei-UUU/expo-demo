@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, View, Text, TouchableHighlight } from 'react-native';
+import { ScrollView, View, Text, TouchableOpacity } from 'react-native';
 import { styles } from '../styles/settings';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -23,21 +23,23 @@ class SettingsScreen extends Component {
         <ScrollView style={{ flex: 1 }}>
           <View style={styles.Header}>
 
-            <TouchableHighlight onPress={() => this._jump("Login")}>
+            <TouchableOpacity onPress={() => this._jump("Login")}>
               <Ionicons name="md-contact" size={82} backgroundColor="#e8e8e8" color="#e8e8e8" />
-            </TouchableHighlight>
+            </TouchableOpacity>
             <Text style={styles.grayText}>点击登录</Text>
           </View>
           <View style={styles.card}>
-            <View style={styles.cardBar}>
-              <Ionicons name="md-card" size={24} color="#fb507a" style={styles.barIcon} />
-              <View style={styles.barLeft}>
-                <Text>账户</Text>
+            <TouchableOpacity onPress={() => this._jump("Account")}>
+              <View style={styles.cardBar}>
+                <Ionicons name="md-card" size={24} color="#fb507a" style={styles.barIcon} />
+                <View style={styles.barLeft}>
+                  <Text>账户</Text>
+                </View>
+                <View style={styles.barRight}>
+                  <Text style={styles.Num}>0.00</Text>
+                </View>
               </View>
-              <View style={styles.barRight}>
-                <Text style={styles.Num}>0.00</Text>
-              </View>
-            </View>
+            </TouchableOpacity>
             <View style={styles.cardBar}>
               <Ionicons name="md-journal" size={24} color="#ffc73a" style={styles.barIcon} />
               <View style={styles.barLeft}>

@@ -8,6 +8,9 @@ import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import ContentScreen from '../screens/ContentScreen';
 import LoginScreen from '../screens/LoginScreen';
+import AccountScreen from '../screens/AccountScreen';
+import RevenueScreen from '../screens/RevenueScreen';
+import ResearchScreen from '../screens/ResearchScreen';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -65,7 +68,10 @@ LinksStack.path = '';
 const SettingsStack = createStackNavigator(
   {
     Settings: SettingsScreen,
-    Login: LoginScreen
+    Login: LoginScreen,
+    Account: AccountScreen,
+    Revenue: RevenueScreen,
+    Research: ResearchScreen
   },
   {
     headerMode: 'none',
