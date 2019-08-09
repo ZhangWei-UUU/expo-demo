@@ -7,6 +7,7 @@ import {
   StatusBar
 } from 'react-native';
 import PieChartComponent from '../components/PieChart';
+import CustomTopBar from '../components/TopBar';
 
 class LineTrendScreen extends Component {
   constructor(props) {
@@ -19,6 +20,8 @@ class LineTrendScreen extends Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
+        <CustomTopBar title="数据分析" {...this.props} />
+
         <LineChart
           data={{
             labels: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月'],

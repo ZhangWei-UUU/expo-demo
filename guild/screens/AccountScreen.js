@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import CustomTopBar from '../components/TopBar';
 
 import {
   Text,
@@ -18,6 +19,7 @@ class AccountScreen extends Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
+        <CustomTopBar title="我的账户" {...this.props} />
         <StatusBar
           backgroundColor="#fff"
           barStyle="dark-content" // Here is where you change the font-color

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import CustomTopBar from '../components/TopBar';
 
 import {
   Text,
@@ -20,6 +21,7 @@ class ResearchScreen extends Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
+        <CustomTopBar title="研报" {...this.props} />
         <StatusBar
           backgroundColor="#fff"
           barStyle="dark-content" // Here is where you change the font-color
