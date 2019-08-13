@@ -57,14 +57,14 @@ class SettingsScreen extends Component {
         <ScrollView style={{ flex: 1 }}>
           <View style={styles.Header}>
             {userName ?
-              <View>
+              <View style={{ marginTop: 30, alignItems: "center" }}>
                 <TouchableOpacity onPress={() => this._jump("UpdateHead")}>
                   <Ionicons name="md-contact" size={82} backgroundColor="#e8e8e8" color="#e8e8e8" />
                 </TouchableOpacity>
                 <Text style={styles.blackText}>{userName}</Text>
               </View>
               :
-              <View>
+              <View style={{ marginTop: 30, alignItems: "center" }}>
                 <TouchableOpacity onPress={() => this._jump("Phone")}>
                   <Ionicons name="md-contact" size={82} backgroundColor="#e8e8e8" color="#e8e8e8" />
                 </TouchableOpacity>

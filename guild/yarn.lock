@@ -2579,7 +2579,7 @@ expo-asset@^6.0.0, expo-asset@~6.0.0:
     path-browserify "^1.0.0"
     url-parse "^1.4.4"
 
-expo-constants@6.0.0, expo-constants@~6.0.0:
+expo-constants@~6.0.0:
   version "6.0.0"
   resolved "http://r.cnpmjs.org/expo-constants/download/expo-constants-6.0.0.tgz#ff4598985ba006e24949be3f05be7429e5bedacf"
   integrity sha1-/0WYmFugBuJJSb4/Bb50KeW+2s8=
@@ -2599,6 +2599,11 @@ expo-font@6.0.1, expo-font@~6.0.1:
   integrity sha1-I5sEaO35DUQdyiAlPACzNOgSxcU=
   dependencies:
     fontfaceobserver "^2.1.0"
+
+expo-image-picker@~6.0.0:
+  version "6.0.0"
+  resolved "http://r.cnpmjs.org/expo-image-picker/download/expo-image-picker-6.0.0.tgz#776f4487d986ba9cc82169a47445e8c13ca3108b"
+  integrity sha1-d29Eh9mGupzIIWmkdEXowTyjEIs=
 
 expo-keep-awake@~6.0.0:
   version "6.0.0"
