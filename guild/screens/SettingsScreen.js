@@ -38,22 +38,6 @@ class SettingsScreen extends Component {
     this.listener.remove();
   }
 
-  // async componentDidUpdate(preProps, preState) {
-
-  //   try {
-  //     let userName = await AsyncStorage.getItem('userName');
-  //     console.log("update", userName, preState.userName)
-  //     if (userName !== preState.userName) {
-  //       this.setState({
-  //         userName
-  //       })
-  //     }
-
-  //   } catch (error) {
-  //     console.error("获取本地存储错误")
-  //   }
-  // }
-  // 退出登录
   _logout = async () => {
     try {
       await AsyncStorage.removeItem('userName');
@@ -72,10 +56,21 @@ class SettingsScreen extends Component {
       <View style={styles.body}>
         <ScrollView style={{ flex: 1 }}>
           <View style={styles.Header}>
-            <TouchableOpacity onPress={() => this._jump("Phone")}>
-              <Ionicons name="md-contact" size={82} backgroundColor="#e8e8e8" color="#e8e8e8" />
-            </TouchableOpacity>
-            {userName ? <Text style={styles.blackText}>{userName}</Text> : <Text style={styles.grayText}>点击登录</Text>}
+            {userName ?
+              <View>
+                <TouchableOpacity onPress={() => this._jump("UpdateHead")}>
+                  <Ionicons name="md-contact" size={82} backgroundColor="#e8e8e8" color="#e8e8e8" />
+                </TouchableOpacity>
+                <Text style={styles.blackText}>{userName}</Text>
+              </View>
+              :
+              <View>
+                <TouchableOpacity onPress={() => this._jump("Phone")}>
+                  <Ionicons name="md-contact" size={82} backgroundColor="#e8e8e8" color="#e8e8e8" />
+                </TouchableOpacity>
+                <Text style={styles.grayText}>点击登录</Text>
+              </View>
+            }
           </View>
           <View style={styles.card}>
             <TouchableOpacity onPress={() => this._jump("Account")}>

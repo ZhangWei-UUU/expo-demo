@@ -15,6 +15,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   grayText: {
+    alignItems: 'center',
     color: "#ccc"
   },
   blackText: {

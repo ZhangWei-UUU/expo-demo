@@ -13,6 +13,7 @@ import RevenueScreen from '../screens/RevenueScreen';
 import ResearchScreen from '../screens/ResearchScreen';
 import PhoneScreen from '../screens/PhoneScreen';
 import LineTrendScreen from '../screens/LineTrendScreen';
+import UpdateHeadScreen from '../screens/UpdateHeadScreen';
 /**
  * 首页栈堆的实现
  */
@@ -64,6 +65,7 @@ LinksStack.path = '';
 const SettingsStack = createStackNavigator(
   {
     Settings: SettingsScreen,
+    UpdateHead: UpdateHeadScreen,
     Login: LoginScreen,
     Phone: PhoneScreen,
     Account: AccountScreen,
