@@ -4,6 +4,8 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
+import IndexScreen from '../screens/IndexScreen';
+
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import ContentScreen from '../screens/ContentScreen';
@@ -14,16 +16,19 @@ import ResearchScreen from '../screens/ResearchScreen';
 import PhoneScreen from '../screens/PhoneScreen';
 import LineTrendScreen from '../screens/LineTrendScreen';
 import UpdateHeadScreen from '../screens/UpdateHeadScreen';
+import RegisterScreen from '../screens/RegisterScreen';
+
 /**
  * 首页栈堆的实现
  */
 const HomeStack = createStackNavigator(
   {
+    Index: IndexScreen,
     Home: HomeScreen,
     Content: ContentScreen
   },
   {
-    initialRouteName: "Home",
+    initialRouteName: "Index",
     headerMode: 'none',
   }
 );
@@ -68,6 +73,7 @@ const SettingsStack = createStackNavigator(
     UpdateHead: UpdateHeadScreen,
     Login: LoginScreen,
     Phone: PhoneScreen,
+    Register: RegisterScreen,
     Account: AccountScreen,
     LineTrend: LineTrendScreen,
     Revenue: RevenueScreen,

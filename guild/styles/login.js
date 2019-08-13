@@ -7,6 +7,11 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: "#fff"
   },
+  bodyVerifiy: {
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height,
+    backgroundColor: "#fff"
+  },
   linearGradient: {
     paddingHorizontal: 20,
     paddingVertical: 30,
@@ -23,10 +28,9 @@ export const styles = StyleSheet.create({
     margin: 6
   },
   phoneInput: {
-    borderStyle: "solid",
-    borderColor: "#999",
-    borderWidth: 1,
-    width: 270,
+    borderBottomColor: "#ccc",
+    borderBottomWidth: 1,
+    width: Dimensions.get('window').width * 0.8,
     padding: 5,
     fontSize: 22,
     borderRadius: 4,
@@ -34,11 +38,11 @@ export const styles = StyleSheet.create({
 
   },
   custombtn: {
-    padding: 10,
-    borderRadius: 18,
-    color: '#fff',
-    backgroundColor: '#FF5A4F',
+    padding: 16,
+    borderRadius: 28,
+
+    backgroundColor: '#FFDA1F',
     alignItems: 'center',
-    width: 180,
+    width: Dimensions.get('window').width * 0.8,
   }
 })

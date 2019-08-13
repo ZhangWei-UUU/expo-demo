@@ -128,7 +128,7 @@ class SettingsScreen extends Component {
                 </View>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => this._jump("Account")}>
+            <TouchableOpacity onPress={() => this._jump("Register")}>
 
               <View style={styles.cardBar}>
                 <Ionicons name="md-settings" size={24} color="gray" style={styles.barIcon} />
