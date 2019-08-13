@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, ImagePicker } from 'react-native';
 import * as Permissions from 'expo-permissions';
-import * as ImagePicker from 'expo-image-picker';
 
 class UpdateHeadScreen extends Component {
   constructor(props) {
@@ -32,7 +31,7 @@ class UpdateHeadScreen extends Component {
   render() {
     return (
       <View>
-        <Text>上传xx</Text>
+        <Text>上传</Text>
       </View>
     )
   }
