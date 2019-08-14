@@ -1,11 +1,9 @@
-import React, { Component, createRef } from 'react';
+import React, { Component } from 'react';
 import { Text, View, DeviceEventEmitter, Alert, TouchableOpacity, Image, TextInput, AsyncStorage } from 'react-native';
 import CustomTopBar from '../components/TopBar';
-import CodeInput from 'react-native-confirmation-code-field';
 import { styles } from '../styles/login';
-
-const TMP_HOST = "http://10.73.49.153";
-const TMP_API = "/mobile/login/verification";
+import Remote from '../constants/Remote';
+const API = "/api/registry";
 
 class RegisterScreen extends Component {
   constructor(props) {
@@ -34,8 +32,6 @@ class RegisterScreen extends Component {
     let { username, password } = this.state;
     let { navigation } = this.props;
     const phone = navigation.getParam('phone');
-    const TMP_HOST = "http://10.73.49.153";
-    const TMP_API = "/api/registry";
     const OPTIONS = {
       method: "POST",
       headers: {
@@ -45,7 +41,7 @@ class RegisterScreen extends Component {
       body: JSON.stringify({ username, password, phone })
     }
     try {
-      let res = await fetch(TMP_HOST + TMP_API, OPTIONS);
+      let res = await fetch(Remote + API, OPTIONS);
       let result = await res.json();
       if (result.success === true) {
         try {

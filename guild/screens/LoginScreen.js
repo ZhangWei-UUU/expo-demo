@@ -3,9 +3,8 @@ import { Text, View, DeviceEventEmitter, Alert, AsyncStorage, Image } from 'reac
 import CustomTopBar from '../components/TopBar';
 import CodeInput from 'react-native-confirmation-code-field';
 import { styles } from '../styles/login';
-
-const TMP_HOST = "http://10.73.49.153";
-const TMP_API = "/mobile/login/verification";
+import Remote from '../constants/Remote';
+const API = "/mobile/login/verification";
 
 class LoginScreen extends Component {
   constructor(props) {
@@ -59,7 +58,7 @@ class LoginScreen extends Component {
       body: JSON.stringify({ phone, code })
     }
     try {
-      let res = await fetch(TMP_HOST + TMP_API, OPTIONS);
+      let res = await fetch(Remote + API, OPTIONS);
       let result = await res.json();
       if (result.success === false) {
         Alert.alert(result.reason)
@@ -81,14 +80,6 @@ class LoginScreen extends Component {
       console.error(err.toString());
     }
 
-    // if (code === '123456') {
-    //   this._storeData("张伟", { account: 10000, order: 12 });
-    //   this.props.navigation.navigate('Settings', { refresh: this.refresh() });
-    // } else {
-    //   Alert.alert('验证码未通过', '请检查您的验证码是否输入正确!', [{ text: 'OK' }], {
-    //     cancelable: false,
-    //   });
-    // }
     this.codeInputRef.current.clear();
   };
 

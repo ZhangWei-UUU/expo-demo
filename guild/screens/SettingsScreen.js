@@ -7,7 +7,7 @@ class SettingsScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userName: undefined
+      userToken: undefined
     }
   }
 
@@ -18,16 +18,15 @@ class SettingsScreen extends Component {
   async componentDidMount() {
     var self = this;
     this.listener = DeviceEventEmitter.addListener('BackToLogin', async (url) => {
-      let userName = await AsyncStorage.getItem('userName');
+      let userToken = await AsyncStorage.getItem('user-token');
       self.setState({
-        userName: userName
+        userToken
       });
     });
     try {
-      let userName = await AsyncStorage.getItem('userName');
+      let userToken = await AsyncStorage.getItem('user-token');
       this.setState({
-        userName: userName,
-        refresh: false
+        userToken,
       })
     } catch (error) {
       console.error("获取本地存储错误")
@@ -40,8 +39,7 @@ class SettingsScreen extends Component {
 
   _logout = async () => {
     try {
-      await AsyncStorage.removeItem('userName');
-      await AsyncStorage.removeItem('userData');
+      await AsyncStorage.removeItem('user-token');
       Alert.alert("退出成功");
     } catch (error) {
       console.error("删除本地存储错误");
@@ -51,17 +49,17 @@ class SettingsScreen extends Component {
     }
   }
   render() {
-    let { userName } = this.state;
+    let { userToken } = this.state;
     return (
       <View style={styles.body}>
         <ScrollView style={{ flex: 1 }}>
           <View style={styles.Header}>
-            {userName ?
+            {userToken ?
               <View style={{ marginTop: 30, alignItems: "center" }}>
                 <TouchableOpacity onPress={() => this._jump("UpdateHead")}>
                   <Ionicons name="md-contact" size={82} backgroundColor="#e8e8e8" color="#e8e8e8" />
                 </TouchableOpacity>
-                <Text style={styles.blackText}>{userName}</Text>
+                <Text style={styles.blackText}>{userToken}</Text>
               </View>
               :
               <View style={{ marginTop: 30, alignItems: "center" }}>
@@ -142,7 +140,7 @@ class SettingsScreen extends Component {
             </TouchableOpacity>
 
           </View>
-          {userName ? <View style={styles.card}>
+          {userToken ? <View style={styles.card}>
             <View style={{ alignItems: "center" }}>
               <TouchableOpacity onPress={this._logout}>
                 <Text style={{ color: "red", fontSize: 18 }}>退出登录</Text>
