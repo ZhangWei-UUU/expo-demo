@@ -35,7 +35,7 @@ class SettingsScreen extends Component {
         Alert.alert("获取用户登录信息失败", "请检查当前网络是否正常")
       }
     } catch (err) {
-      console.error(err.toString());
+      // console.error(err.toString());
     }
 
 
