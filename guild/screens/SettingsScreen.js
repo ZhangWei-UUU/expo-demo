@@ -2,32 +2,53 @@ import React, { Component } from 'react';
 import { ScrollView, View, Text, TouchableOpacity, AsyncStorage, Alert, DeviceEventEmitter } from 'react-native';
 import { styles } from '../styles/settings';
 import { Ionicons } from '@expo/vector-icons';
+import Remote from '../constants/Remote';
+const API = "/userinfo";
 
 class SettingsScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userToken: undefined
+      user: undefined
     }
   }
 
+  // 页面跳转
   _jump = (pageName) => {
     this.props.navigation.navigate(pageName)
   }
 
+  // 获取用户
+  _getUserInfo = async (token) => {
+    try {
+      let res = await fetch(Remote + API + `?token=${token}`);
+      let result = await res.json();
+      if (result.success) {
+        this.setState({
+          user: result.result
+        })
+      } else {
+        Alert.alert("获取用户登录信息失败", "请检查当前网络是否正常")
+      }
+    } catch (err) {
+      console.error(err.toString());
+    }
+
+
+  }
   async componentDidMount() {
-    var self = this;
     this.listener = DeviceEventEmitter.addListener('BackToLogin', async (url) => {
       let userToken = await AsyncStorage.getItem('user-token');
-      self.setState({
-        userToken
-      });
+      if (userToken) {
+        this._getUserInfo(userToken);
+      }
+
     });
     try {
       let userToken = await AsyncStorage.getItem('user-token');
-      this.setState({
-        userToken,
-      })
+      if (userToken) {
+        this._getUserInfo(userToken);
+      }
     } catch (error) {
       console.error("获取本地存储错误")
     }
@@ -49,17 +70,17 @@ class SettingsScreen extends Component {
     }
   }
   render() {
-    let { userToken } = this.state;
+    let { user } = this.state;
     return (
       <View style={styles.body}>
         <ScrollView style={{ flex: 1 }}>
           <View style={styles.Header}>
-            {userToken ?
+            {user ?
               <View style={{ marginTop: 30, alignItems: "center" }}>
                 <TouchableOpacity onPress={() => this._jump("UpdateHead")}>
                   <Ionicons name="md-contact" size={82} backgroundColor="#e8e8e8" color="#e8e8e8" />
                 </TouchableOpacity>
-                <Text style={styles.blackText}>{userToken}</Text>
+                <Text style={styles.blackText}>{user.username}</Text>
               </View>
               :
               <View style={{ marginTop: 30, alignItems: "center" }}>
@@ -140,7 +161,7 @@ class SettingsScreen extends Component {
             </TouchableOpacity>
 
           </View>
-          {userToken ? <View style={styles.card}>
+          {user ? <View style={styles.card}>
             <View style={{ alignItems: "center" }}>
               <TouchableOpacity onPress={this._logout}>
                 <Text style={{ color: "red", fontSize: 18 }}>退出登录</Text>
