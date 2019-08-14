@@ -21,10 +21,11 @@ class Deck extends Component {
     super(props);
     this.state = {
       items: [
-        { src: require("../assets/images/test-1.png") },
-        { src: require("../assets/images/test-2.png") },
-        { src: require("../assets/images/test-3.png") },
-        { src: require("../assets/images/test-4.png") }
+        { src: "lock" },
+        { src: "lock" },
+        { src: "lock" },
+        { src: "lock" },
+        { src: "lock" },
       ]
     }
   }
