@@ -10,7 +10,6 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import DoubleClick from 'react-native-double-click';
-import Swiper from 'react-native-swiper-animated';
 import { BackHandler } from "react-native";
 
 import { styles } from '../styles/deck';

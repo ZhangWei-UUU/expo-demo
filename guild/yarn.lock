@@ -1883,11 +1883,6 @@ ci-info@^2.0.0:
   resolved "http://r.cnpmjs.org/ci-info/download/ci-info-2.0.0.tgz#67a9e964be31a51e15e5010d58e6f12834002f46"
   integrity sha1-Z6npZL4xpR4V5QENWObxKDQAL0Y=
 
-clamp@^1.0.1:
-  version "1.0.1"
-  resolved "http://r.cnpmjs.org/clamp/download/clamp-1.0.1.tgz#66a0e64011816e37196828fdc8c8c147312c8634"
-  integrity sha1-ZqDmQBGBbjcZaCj9yMjBRzEshjQ=
-
 class-utils@^0.3.5:
   version "0.3.6"
   resolved "http://r.cnpmjs.org/class-utils/download/class-utils-0.3.6.tgz#f93369ae8b9a7ce02fd41faad0ca83033190c463"
@@ -5739,13 +5734,6 @@ react-native-svg@^9.5.3:
   version "9.5.3"
   resolved "http://r.cnpmjs.org/react-native-svg/download/react-native-svg-9.5.3.tgz#2389f3ffd700c6441166496a1aeade31ead89c59"
   integrity sha1-I4nz/9cAxkQRZklqGureMerYnFk=
-
-react-native-swiper-animated@^1.5.3:
-  version "1.5.3"
-  resolved "http://r.cnpmjs.org/react-native-swiper-animated/download/react-native-swiper-animated-1.5.3.tgz#3c7d029703c0e42b670360872085ebe63d87edde"
-  integrity sha1-PH0ClwPA5CtnA2CHIIXr5j2H7d4=
-  dependencies:
-    clamp "^1.0.1"
 
 react-native-swiper@^1.5.14:
   version "1.5.14"

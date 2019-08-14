@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { ScrollView, View, Text, TouchableOpacity, AsyncStorage, Alert, DeviceEventEmitter } from 'react-native';
+import { ScrollView, View, Text, TouchableOpacity, AsyncStorage, Alert, DeviceEventEmitter, Image } from 'react-native';
 import { styles } from '../styles/settings';
 import { Ionicons } from '@expo/vector-icons';
+import { withNavigation } from "react-navigation";
+
 import Remote from '../constants/Remote';
 const API = "/userinfo";
 
@@ -9,7 +11,8 @@ class SettingsScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: undefined
+      user: undefined,
+      refresh: false
     }
   }
 
@@ -25,7 +28,8 @@ class SettingsScreen extends Component {
       let result = await res.json();
       if (result.success) {
         this.setState({
-          user: result.result
+          user: result.result,
+          refresh: false
         })
       } else {
         Alert.alert("获取用户登录信息失败", "请检查当前网络是否正常")
@@ -37,12 +41,19 @@ class SettingsScreen extends Component {
 
   }
   async componentDidMount() {
+    const { navigation } = this.props;
+    this.focusListener = navigation.addListener("didFocus", async () => {
+      let userToken = await AsyncStorage.getItem('user-token');
+      if (userToken) {
+        this._getUserInfo(userToken);
+      }
+    });
+
     this.listener = DeviceEventEmitter.addListener('BackToLogin', async (url) => {
       let userToken = await AsyncStorage.getItem('user-token');
       if (userToken) {
         this._getUserInfo(userToken);
       }
-
     });
     try {
       let userToken = await AsyncStorage.getItem('user-token');
@@ -56,6 +67,7 @@ class SettingsScreen extends Component {
 
   componentWillUnmount() {
     this.listener.remove();
+    this.focusListener.remove();
   }
 
   _logout = async () => {
@@ -78,14 +90,16 @@ class SettingsScreen extends Component {
             {user ?
               <View style={{ marginTop: 30, alignItems: "center" }}>
                 <TouchableOpacity onPress={() => this._jump("UpdateHead")}>
-                  <Ionicons name="md-contact" size={82} backgroundColor="#e8e8e8" color="#e8e8e8" />
+                  <View style={styles.headWrapper}>
+                    <Image source={{ uri: user.head }} style={styles.head} />
+                  </View>
                 </TouchableOpacity>
                 <Text style={styles.blackText}>{user.username}</Text>
               </View>
               :
               <View style={{ marginTop: 30, alignItems: "center" }}>
                 <TouchableOpacity onPress={() => this._jump("Phone")}>
-                  <Ionicons name="md-contact" size={82} backgroundColor="#e8e8e8" color="#e8e8e8" />
+                  <Ionicons name="md-contact" size={82} backgroundColor="#fff" color="#000" />
                 </TouchableOpacity>
                 <Text style={styles.grayText}>点击登录</Text>
               </View>
@@ -99,7 +113,7 @@ class SettingsScreen extends Component {
                   <Text>账户</Text>
                 </View>
                 <View style={styles.barRight}>
-                  <Text style={styles.Num}>0.00</Text>
+                  <Text style={styles.Num}>{user ? user.coin : 0}</Text>
                 </View>
               </View>
             </TouchableOpacity>
@@ -109,16 +123,16 @@ class SettingsScreen extends Component {
                 <Text>订阅期刊</Text>
               </View>
               <View style={styles.barRight}>
-                <Text style={styles.Num}>0份</Text>
+                <Text style={styles.Num}>0</Text>
               </View>
             </View>
             <View style={styles.cardBar}>
               <Ionicons name="md-analytics" size={24} color="#ff6165" style={styles.barIcon} />
               <View style={styles.barLeft}>
-                <Text>收益率</Text>
+                <Text>消息</Text>
               </View>
               <View style={styles.barRight}>
-                <Text style={styles.Num}>0%</Text>
+                <Text style={styles.Num}>0</Text>
               </View>
             </View>
           </View>
@@ -177,4 +191,4 @@ class SettingsScreen extends Component {
   }
 }
 
-export default SettingsScreen;
+export default withNavigation(SettingsScreen);

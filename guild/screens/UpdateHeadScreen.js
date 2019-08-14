@@ -1,9 +1,11 @@
 import * as React from 'react';
-import { TouchableOpacity, Image, View, Alert, Dimensions, Button } from 'react-native';
+import { TouchableOpacity, Image, View, Alert, Dimensions, Button, AsyncStorage } from 'react-native';
 import Constants from 'expo-constants';
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
 import CustomTopBar from '../components/TopBar';
+import Remote from '../constants/Remote';
+
 
 export default class ImagePickerExample extends React.Component {
   state = {
@@ -14,6 +16,7 @@ export default class ImagePickerExample extends React.Component {
     this.getPermissionAsync();
   }
 
+  // 获取相机权限
   getPermissionAsync = async () => {
     if (Constants.platform.ios) {
       const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
@@ -32,6 +35,36 @@ export default class ImagePickerExample extends React.Component {
     }
   }
 
+  // 修改用户头像
+  _modifyHead = async (value) => {
+    let data = {
+      field: "head",
+      value: "https://" + value
+    };
+    let userToken = await AsyncStorage.getItem('user-token');
+
+    let options = {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + userToken
+      }
+    };
+    try {
+      let res = await fetch(Remote + "/userinfo/modify", options);
+      let back = await res.json();
+      if (back.n === 1 && back.nModified === 1 && back.ok === 1) {
+        this.props.navigation.navigate("Settings", { refresh: true });
+      } else {
+        Alert.alert("上传失败请检查当前网络是否畅通")
+      }
+    } catch (err) {
+      console.error(err.toString())
+    }
+  }
+  // 选择相片
   _pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -43,9 +76,9 @@ export default class ImagePickerExample extends React.Component {
     }
   };
 
+  // 上传相片
   _uploadImage = async () => {
     let uri = this.state.image;
-    let apiUrl = 'https://polkadot.cloud-wave.cn/api/uploadImage';
     let uriParts = uri.split('.');
     let fileType = uriParts[uriParts.length - 1];
     let formData = new FormData();
@@ -65,14 +98,16 @@ export default class ImagePickerExample extends React.Component {
       },
     };
     try {
-      let res = await fetch(apiUrl, options);
+      let res = await fetch(Remote + "/api/uploadImage", options);
       let result = await res.json();
-      console.log(result);
+      if (result.success) {
+        this._modifyHead(result.location)
+      } else {
+        Alert.alert("上传失败请检查当前网络是否畅通")
+      }
     } catch (err) {
       console.error(err.toString())
     }
-
-    console.log(result)
   }
   render() {
     let { image } = this.state;

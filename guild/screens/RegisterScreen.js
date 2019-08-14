@@ -38,7 +38,7 @@ class RegisterScreen extends Component {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ username, password, phone })
+      body: JSON.stringify({ username, password, phone, coin: 0, head: "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" })
     }
     try {
       let res = await fetch(Remote + API, OPTIONS);

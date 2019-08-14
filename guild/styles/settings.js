@@ -7,16 +7,24 @@ export const styles = StyleSheet.create({
     backgroundColor: "#e8e8e8"
   },
   Header: {
-    height: 220,
+    height: 250,
     padding: 30,
     marginBottom: 10,
-    backgroundColor: "#fff",
+    backgroundColor: "#ffda1f",
     justifyContent: 'center',
     alignItems: 'center',
+    elevation: 2,
+    shadowColor: '#000000',
+    shadowOffset: {
+      width: 0,
+      height: 3
+    },
+    shadowRadius: 5,
+    shadowOpacity: 1.0
   },
   grayText: {
     alignItems: 'center',
-    color: "#ccc"
+    color: "#000"
   },
   blackText: {
     color: "#000"
@@ -47,5 +55,17 @@ export const styles = StyleSheet.create({
   Num: {
     fontWeight: "bold",
     fontSize: 20
-  }
+  },
+  head: {
+    width: 80,
+    height: 80,
+    borderRadius: 80
+  },
+  headWrapper: {
+    width: 80,
+    height: 80,
+    borderRadius: 80,
+    backgroundColor: "#fff",
+    marginBottom: 15
+  },
 })
