@@ -3,7 +3,6 @@ import { Text, View, DeviceEventEmitter, Alert, TouchableOpacity, Image, TextInp
 import CustomTopBar from '../components/TopBar';
 import { styles } from '../styles/login';
 import Remote from '../constants/Remote';
-const API = "/api/registry";
 
 class RegisterScreen extends Component {
   constructor(props) {
@@ -41,20 +40,16 @@ class RegisterScreen extends Component {
       body: JSON.stringify({ username, password, phone, coin: 0, head: "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" })
     }
     try {
-      let res = await fetch(Remote + API, OPTIONS);
+      let res = await fetch(`${Remote}/api/registry`, OPTIONS);
       let result = await res.json();
       if (result.success === true) {
-        try {
-          await AsyncStorage.setItem('user-token', result.token);
-          this.props.navigation.push("Settings")
-        } catch (error) {
-          Alert.alert('您的手机不支持本地存储');
-        }
+        await AsyncStorage.setItem('user-token', result.token);
+        this.props.navigation.push("Settings")
       } else {
         Alert.alert('注册失败', '请检查网络是否正常');
       }
     } catch (err) {
-      console.error(err.toString());
+      console.log(err)
     }
   }
 

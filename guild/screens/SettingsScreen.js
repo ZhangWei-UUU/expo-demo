@@ -35,11 +35,10 @@ class SettingsScreen extends Component {
         Alert.alert("获取用户登录信息失败", "请检查当前网络是否正常")
       }
     } catch (err) {
-      // console.error(err.toString());
+      Alert.alert("获取用户登录信息失败", "请检查当前网络是否正常")
     }
-
-
   }
+
   async componentDidMount() {
     const { navigation } = this.props;
     this.focusListener = navigation.addListener("didFocus", async () => {
@@ -55,6 +54,7 @@ class SettingsScreen extends Component {
         this._getUserInfo(userToken);
       }
     });
+
     try {
       let userToken = await AsyncStorage.getItem('user-token');
       if (userToken) {
@@ -81,6 +81,7 @@ class SettingsScreen extends Component {
       this.props.navigation.replace("Settings")
     }
   }
+
   render() {
     let { user } = this.state;
     return (

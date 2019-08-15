@@ -103,10 +103,10 @@ export default class ImagePickerExample extends React.Component {
       if (result.success) {
         this._modifyHead(result.location)
       } else {
-        Alert.alert("上传失败请检查当前网络是否畅通")
+        Alert.alert("上传失败", "服务端错误")
       }
     } catch (err) {
-      console.error(err.toString())
+      Alert.alert("上传失败", "请检查当前网络是否畅通")
     }
   }
   render() {

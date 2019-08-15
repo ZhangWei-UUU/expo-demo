@@ -1,8 +1,9 @@
-var production = "https://polkadot.cloud-wave.cn/";
-var development = "http://10.73.53.43";
-var Remote = production;
+let development = false;
 
-if (process.env.NODE_ENV === "development") {
-  Remote = development;
+let Remote;
+if (development) {
+  Remote = "http://10.73.53.43"
+} else {
+  Remote = "https://polkadot.cloud-wave.cn";
 }
 export default Remote;

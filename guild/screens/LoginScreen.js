@@ -4,7 +4,6 @@ import CustomTopBar from '../components/TopBar';
 import CodeInput from 'react-native-confirmation-code-field';
 import { styles } from '../styles/login';
 import Remote from '../constants/Remote';
-const API = "/mobile/login/verification";
 
 class LoginScreen extends Component {
   constructor(props) {
@@ -58,7 +57,7 @@ class LoginScreen extends Component {
       body: JSON.stringify({ phone, code })
     }
     try {
-      let res = await fetch(Remote + API, OPTIONS);
+      let res = await fetch(`${Remote}/mobile/login/verification`, OPTIONS);
       let result = await res.json();
       if (result.success === false) {
         Alert.alert(result.reason)
@@ -77,7 +76,7 @@ class LoginScreen extends Component {
         }
       }
     } catch (err) {
-      console.error(err.toString());
+      Alert.alert("登录失败", "请检查当前网络是否正常")
     }
 
     this.codeInputRef.current.clear();
