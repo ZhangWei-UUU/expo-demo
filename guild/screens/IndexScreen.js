@@ -1,128 +1,18 @@
 import React, { PureComponent } from 'react';
 import CustomHeadBar from '../components/HeadBar';
-import { StyleSheet, View, Text, Dimensions, TouchableOpacity, Image, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, Image, ScrollView } from 'react-native';
 import Swiper from 'react-native-swiper';
 import { BackHandler } from "react-native";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { styles } from '../styles/index';
 
 const CASES = [
   { src: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1565702551439&di=7039e85a9157a9038929e1cd8dc1bd64&imgtype=0&src=http%3A%2F%2Fwww.chainske.com%2Ftupian%2F20180909%2Fohssvvzkztq151.jpg", text: "Libp2p带你进入区块链的底层世界" },
   { src: "http://blog.adnansiddiqi.me/wp-content/uploads/2018/03/IPFS.jpg", text: "IPFS分布式存储" },
   { src: "http://test-1253763202.cos.ap-shanghai.myqcloud.com/heads/1564987325493.jpg", text: "Near Protocal入门篇" },
   { src: "https://polkadot.network/content/images/2019/07/image2.png", text: "Substrate 入门篇" },
-
 ]
 
-const styles = StyleSheet.create({
-  body: {
-    width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height,
-  },
-  wrapper: {
-    height: 240,
-  },
-  slide1: {
-    borderRadius: 20,
-    margin: 10,
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    elevation: 2,
-    shadowColor: '#000000',
-    shadowOffset: {
-      width: 0,
-      height: 3
-    },
-    shadowRadius: 5,
-    shadowOpacity: 1.0,
-    position: "relative",
-    overflow: 'hidden',
-
-  },
-  slide2: {
-    borderRadius: 20,
-    margin: 10,
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    elevation: 2,
-    shadowColor: '#000000',
-    shadowOffset: {
-      width: 0,
-      height: 3
-    },
-    shadowRadius: 5,
-    shadowOpacity: 1.0,
-    position: "relative",
-    overflow: 'hidden',
-  },
-  slide3: {
-    borderRadius: 20,
-    margin: 10,
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    elevation: 2,
-    shadowColor: '#000000',
-    shadowOffset: {
-      width: 0,
-      height: 3
-    },
-    shadowRadius: 5,
-    shadowOpacity: 1.0,
-    position: "relative",
-    overflow: 'hidden',
-  },
-  card: {
-    borderRadius: 10,
-    height: 200,
-    width: Dimensions.get('window').width * 0.4,
-    marginLeft: 20,
-    marginBottom: 10,
-    elevation: 2,
-    backgroundColor: "#fff",
-    shadowColor: '#000000',
-    shadowOffset: {
-      width: 0,
-      height: 3
-    },
-    shadowRadius: 5,
-    shadowOpacity: 1.0
-  },
-  text: {
-    color: '#fff',
-    fontSize: 30,
-    fontWeight: 'bold',
-  },
-  headPic: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    bottom: 0,
-    right: 0,
-    borderRadius: 6,
-  },
-  img: {
-    height: 40,
-    width: 40,
-    padding: 10,
-  },
-  picture: {
-    backgroundColor: "#e8e8e8",
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
-    height: 120
-  },
-  lineSingle: {
-    width: Dimensions.get('window').width * 0.2,
-    alignItems: 'center',
-  },
-  lineWrapper: {
-    marginTop: 20,
-    flex: 0,
-    flexDirection: 'row',
-  }
-})
 export default class Home extends PureComponent {
   constructor(props) {
     super(props);
