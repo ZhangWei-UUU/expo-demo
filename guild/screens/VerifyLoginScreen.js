@@ -3,9 +3,9 @@ import { Text, View, DeviceEventEmitter, Alert, AsyncStorage, Image } from 'reac
 import CustomTopBar from '../components/TopBar';
 import CodeInput from 'react-native-confirmation-code-field';
 import { styles } from '../styles/login';
-import Remote from '../constants/Remote';
+import request from '../components/request';
 
-class LoginScreen extends Component {
+class VerifyLoginScreen extends Component {
   constructor(props) {
     super(props);
   }
@@ -48,37 +48,24 @@ class LoginScreen extends Component {
   onFinishCheckingCode = async code => {
     let { navigation } = this.props;
     const phone = navigation.getParam('phone');
-    const OPTIONS = {
-      method: "POST",
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ phone, code })
-    }
-    try {
-      let res = await fetch(`${Remote}/mobile/login/verification`, OPTIONS);
-      let result = await res.json();
-      if (result.success === false) {
-        Alert.alert(result.reason)
+    let result = await request("POST", "/mobile/login/verification", { phone, code });
+    if (result.success === true) {
+      if (result.result) {
+        Alert.alert("登录成功");
       } else {
-        if (result.result === null) {
-          Alert.alert("该手机号尚未注册", "是否注册新账户", [
-            {
-              text: '取消',
-              onPress: () => console.log('Cancel Pressed'),
-              style: 'cancel',
-            },
-            { text: '立即注册', onPress: () => { this._register() } },
-          ])
-        } else {
-          Alert.alert("success")
-        }
+        Alert.alert("该手机号尚未注册", "是否注册新账户", [
+          {
+            text: '取消',
+            style: 'cancel',
+          },
+          { text: '立即注册', onPress: () => { this._register() } },
+        ])
       }
-    } catch (err) {
-      Alert.alert("登录失败", "请检查当前网络是否正常")
+    } else if (result.success === false) {
+      Alert.alert("登录失败", result.reason);
+    } else {
+      Alert.alert("登录失败，请检查网络是否正常", result);
     }
-
     this.codeInputRef.current.clear();
   };
 
@@ -115,4 +102,4 @@ class LoginScreen extends Component {
   }
 }
 
-export default LoginScreen;
+export default VerifyLoginScreen;

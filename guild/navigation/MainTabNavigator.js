@@ -9,7 +9,7 @@ import IndexScreen from '../screens/IndexScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import ContentScreen from '../screens/ContentScreen';
-import LoginScreen from '../screens/LoginScreen';
+import VerifyLoginScreen from '../screens/VerifyLoginScreen';
 import AccountScreen from '../screens/AccountScreen';
 import RevenueScreen from '../screens/RevenueScreen';
 import ResearchScreen from '../screens/ResearchScreen';
@@ -71,7 +71,7 @@ const SettingsStack = createStackNavigator(
   {
     Settings: SettingsScreen,
     UpdateHead: UpdateHeadScreen,
-    Login: LoginScreen,
+    Login: VerifyLoginScreen,
     Phone: PhoneScreen,
     Register: RegisterScreen,
     Account: AccountScreen,

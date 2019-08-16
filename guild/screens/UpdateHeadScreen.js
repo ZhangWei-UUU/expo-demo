@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {
   TouchableOpacity, Image, View, Alert, Dimensions,
-  StyleSheet, AsyncStorage, Text, TouchableHighlight
+  AsyncStorage
 } from 'react-native';
 import Constants from 'expo-constants';
 import * as ImagePicker from 'expo-image-picker';
