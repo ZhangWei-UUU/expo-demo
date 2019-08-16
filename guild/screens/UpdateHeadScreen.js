@@ -7,13 +7,11 @@ import Constants from 'expo-constants';
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
 import CustomTopBar from '../components/TopBar';
-import {
-  ActionSheetProvider,
-  connectActionSheet,
-} from '@expo/react-native-action-sheet';
+import { ActionSheetProvider, connectActionSheet } from '@expo/react-native-action-sheet';
 import ShowActionSheetButton from '../components/ShowActionSheetButton';
 import request from '../components/request';
 import PictureForm from '../constants/PictureForm';
+import Layout from '../constants/Layout';
 
 class UpdateHead extends React.Component {
   state = {
@@ -97,21 +95,19 @@ class UpdateHead extends React.Component {
   }
   render() {
     let { image } = this.state;
+    let { width, height } = Layout.window;
     return (
       <View style={{
-        width: Dimensions.get('window').width,
-        height: Dimensions.get('window').height,
+        width: width,
+        height: height,
         backgroundColor: "#000"
       }}>
         <CustomTopBar title="头像" {...this.props} color="black" />
         <View View style={{ flex: 1, flexDirection: 'row-reverse' }}>
           {this._renderButtons()}
           <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <TouchableOpacity
-              onPress={this._pickImage}
-            >
-              {image &&
-                <Image source={{ uri: image }} style={{ width: Dimensions.get('window').width, height: Dimensions.get('window').width }} />}
+            <TouchableOpacity onPress={this._pickImage}>
+              {image && <Image source={{ uri: image }} style={{ width: width, height: width }} />}
             </TouchableOpacity>
           </View>
         </View>
