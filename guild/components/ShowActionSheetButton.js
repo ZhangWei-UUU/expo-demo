@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { Text, View, TextStyle } from 'react-native';
+import { View } from 'react-native';
 import { MaterialIcons, Entypo } from '@expo/vector-icons';
-import { ActionSheetOptions } from '@expo/react-native-action-sheet';
+import * as ImagePicker from 'expo-image-picker';
 
 const icon = (name) => <MaterialIcons key={name} name={name} size={24} />;
 
@@ -16,6 +16,17 @@ export default class ShowActionSheetButton extends React.PureComponent {
     onSelection: null,
   };
 
+  _pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+    });
+    if (!result.cancelled) {
+      this.setState({ image: result.uri });
+    }
+  };
+
   _showActionSheet = () => {
     const {
       withTitle,
@@ -28,7 +39,7 @@ export default class ShowActionSheetButton extends React.PureComponent {
     } = this.props;
 
     // Same interface as https://facebook.github.io/react-native/docs/actionsheetios.html
-    const options = ['从手机相册选择', '保存到手机'];
+    const options = ['从手机相册选择'];
     const icons = withIcons
       ? [icon('delete'), icon('save'), icon('share'), icon('cancel')]
       : undefined;
@@ -88,14 +99,11 @@ export default class ShowActionSheetButton extends React.PureComponent {
 
   render() {
     return (
-      <View
-        style={{
-          margin: 6,
-        }}>
+      <View>
         <Entypo
           name="dots-three-horizontal"
           color="#fff"
-          size={20}
+          size={25}
           onPress={this._showActionSheet} />
       </View>
     );

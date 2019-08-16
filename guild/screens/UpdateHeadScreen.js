@@ -3,15 +3,16 @@ import {
   TouchableOpacity, Image, View, Alert, Dimensions,
   AsyncStorage
 } from 'react-native';
-import Constants from 'expo-constants';
 import * as ImagePicker from 'expo-image-picker';
+
+import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
-import CustomTopBar from '../components/TopBar';
+import TopBarWidthActionSheet from '../components/Topbars/widthActionSheet';
 import { ActionSheetProvider, connectActionSheet } from '@expo/react-native-action-sheet';
-import ShowActionSheetButton from '../components/ShowActionSheetButton';
 import request from '../components/request';
 import PictureForm from '../constants/PictureForm';
 import Layout from '../constants/Layout';
+
 
 class UpdateHead extends React.Component {
   state = {
@@ -23,20 +24,6 @@ class UpdateHead extends React.Component {
     this.getPermissionAsync();
   }
 
-  _updateSelectionText = (selectedIndex) => {
-    this.setState({
-      selectedIndex,
-    });
-  };
-
-  _renderButtons() {
-    const { showActionSheetWithOptions } = this.props;
-    return (
-      <ShowActionSheetButton onSelection={this._updateSelectionText}
-        showActionSheetWithOptions={showActionSheetWithOptions}
-      />
-    );
-  }
   // 获取相机权限
   getPermissionAsync = async () => {
     if (Constants.platform.ios) {
@@ -70,6 +57,10 @@ class UpdateHead extends React.Component {
     }
 
   }
+
+  pickImageFromSheet = (uri) => {
+    this.setState({ image: uri });
+  }
   // 选择相片
   _pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -102,13 +93,15 @@ class UpdateHead extends React.Component {
         height: height,
         backgroundColor: "#000"
       }}>
-        <CustomTopBar title="头像" {...this.props} color="black" />
+        <TopBarWidthActionSheet
+          {...this.props}
+          pickImageFromSheet={this.pickImageFromSheet}
+          showActionSheetWithOptions={this.props.showActionSheetWithOptions}
+          title="头像"
+          color="black" />
         <View View style={{ flex: 1, flexDirection: 'row-reverse' }}>
-          {this._renderButtons()}
           <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <TouchableOpacity onPress={this._pickImage}>
-              {image && <Image source={{ uri: image }} style={{ width: width, height: width }} />}
-            </TouchableOpacity>
+            {image && <Image source={{ uri: image }} style={{ width: width, height: width }} />}
           </View>
         </View>
       </View>
@@ -122,7 +115,7 @@ export default class UpdateHeadScreen extends React.Component {
   render() {
     return (
       <ActionSheetProvider>
-        <ConnectedApp />
+        <ConnectedApp {...this.props} />
       </ActionSheetProvider>
     );
   }
