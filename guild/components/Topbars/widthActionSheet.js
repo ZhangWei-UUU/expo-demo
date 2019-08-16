@@ -3,7 +3,7 @@ import { AntDesign } from '@expo/vector-icons';
 import { Text, View, TouchableOpacity } from 'react-native';
 
 
-class CustomTopBar extends Component {
+class TopBar extends Component {
   constructor(props) {
     super(props)
   }
@@ -38,4 +38,4 @@ class CustomTopBar extends Component {
   }
 }
 
-export default CustomTopBar;
+export default TopBar;
