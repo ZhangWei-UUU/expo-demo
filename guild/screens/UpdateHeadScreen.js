@@ -1,15 +1,21 @@
 import * as React from 'react';
-import { TouchableOpacity, Image, View, Alert, Dimensions, Button, AsyncStorage } from 'react-native';
+import {
+  TouchableOpacity, Image, View, Alert, Dimensions,
+  Modal, AsyncStorage, Text, TouchableHighlight
+} from 'react-native';
 import Constants from 'expo-constants';
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
 import CustomTopBar from '../components/TopBar';
 import Remote from '../constants/Remote';
+import { Entypo } from '@expo/vector-icons';
+import { connectActionSheet } from '@expo/react-native-action-sheet'
 
 
-export default class ImagePickerExample extends React.Component {
+class UpdateHeadScreen extends React.Component {
   state = {
     image: null,
+    modalVisible: false
   };
 
   componentDidMount() {
@@ -33,6 +39,27 @@ export default class ImagePickerExample extends React.Component {
         this._pickImage()
       }
     }
+  }
+  // 打开底部弹出框
+  _openModal = () => {
+    const options = ['Delete', 'Save', 'Cancel'];
+    const destructiveButtonIndex = 0;
+    const cancelButtonIndex = 2;
+
+    this.props.showActionSheetWithOptions(
+      {
+        options,
+        cancelButtonIndex,
+        destructiveButtonIndex,
+      },
+      buttonIndex => {
+        // Do something here depending on the button index selected
+      },
+    );
+  }
+  // 关闭弹出框
+  setModalVisible(visible) {
+    this.setState({ modalVisible: visible });
   }
 
   // 修改用户头像
@@ -114,19 +141,30 @@ export default class ImagePickerExample extends React.Component {
     return (
       <View style={{
         width: Dimensions.get('window').width,
-        height: Dimensions.get('window').height
+        height: Dimensions.get('window').height,
+        backgroundColor: "#000"
       }}>
-        <CustomTopBar title="返回" {...this.props} />
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-          <TouchableOpacity
-            onPress={this._pickImage}
-          >
-            {image &&
-              <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
+        <CustomTopBar title="头像" {...this.props} color="black" />
+        <View View style={{ flex: 1, flexDirection: 'row-reverse' }}>
+          <TouchableOpacity onPress={this._openModal}>
+            <Entypo name="dots-three-horizontal" size={26} color="#fff" />
           </TouchableOpacity>
-          <Button title="确认上传" onPress={this._uploadImage} />
+          <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            <TouchableOpacity
+              onPress={this._pickImage}
+            >
+              {image &&
+                <Image source={{ uri: image }} style={{ width: Dimensions.get('window').width, height: Dimensions.get('window').width }} />}
+            </TouchableOpacity>
+            {/* <Button title="确认上传" onPress={this._uploadImage} /> */}
+          </View>
         </View>
+
       </View>
     );
   }
 }
+
+const ConnectedApp = connectActionSheet(UpdateHeadScreen)
+
+export default ConnectedApp;

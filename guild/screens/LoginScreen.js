@@ -84,10 +84,6 @@ class LoginScreen extends Component {
 
   static containerProps = { style: styles.inputWrapStyle };
 
-  componentDidMount() {
-
-  }
-
   componentWillUnmount() {
     DeviceEventEmitter.emit('BackToLogin', { login: true });
   }

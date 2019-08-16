@@ -13,19 +13,21 @@ class CustomTopBar extends Component {
   }
 
   render() {
+    let { color } = this.props;
     return (
-      <View style={{ marginTop: 30, height: 30 }}>
+      <View style={{ marginTop: 50, height: 30 }}>
         <TouchableOpacity onPress={this.onBackPress}
           style={{
             flex: 1,
             flexDirection: 'row',
-            width: Dimensions.get('window').width,
+            width: 100,
           }}>
-          <AntDesign name="left" size={26}
-            style={{ width: Dimensions.get('window').width * 0.2, alignItems: "center", }}
+          <AntDesign name="left" size={20}
+            color={color === 'black' ? "#fff" : "#000"}
+            style={{ marginRight: 20, marginLeft: 20, marginTop: 5, alignItems: "center", }}
           />
           <Text style={{
-            width: Dimensions.get('window').width * 0.8,
+            color: color === 'black' ? "#fff" : "#000",
             alignItems: "center",
             fontSize: 20
           }}>{this.props.title}</Text>

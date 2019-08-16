@@ -847,6 +847,11 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
+"@expo/react-native-action-sheet@^3.0.3":
+  version "3.0.3"
+  resolved "http://r.cnpmjs.org/@expo/react-native-action-sheet/download/@expo/react-native-action-sheet-3.0.3.tgz#1d69a2668784961c6d458babe52e9a02893936a2"
+  integrity sha1-HWmiZoeElhxtRYur5S6aAok5NqI=
+
 "@expo/samples@~3.0.3":
   version "3.0.3"
   resolved "http://r.cnpmjs.org/@expo/samples/download/@expo/samples-3.0.3.tgz#83ade8e4d5cae95c257d5a99767eda66ca04f73e"
