@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {
   TouchableOpacity, Image, View, Alert, Dimensions,
-  Modal, AsyncStorage, Text, TouchableHighlight
+  StyleSheet, AsyncStorage, Text, TouchableHighlight
 } from 'react-native';
 import Constants from 'expo-constants';
 import * as ImagePicker from 'expo-image-picker';
@@ -9,19 +9,42 @@ import * as Permissions from 'expo-permissions';
 import CustomTopBar from '../components/TopBar';
 import Remote from '../constants/Remote';
 import { Entypo } from '@expo/vector-icons';
-import { connectActionSheet } from '@expo/react-native-action-sheet'
+import {
+  ActionSheetProvider,
+  connectActionSheet,
+  ActionSheetOptions,
+} from '@expo/react-native-action-sheet';
+import ShowActionSheetButton from '../components/ShowActionSheetButton';
+import { styles } from '../styles/updateHead';
 
-
-class UpdateHeadScreen extends React.Component {
+class UpdateHead extends React.Component {
   state = {
     image: null,
-    modalVisible: false
+    selectedIndex: null
   };
 
   componentDidMount() {
     this.getPermissionAsync();
   }
 
+  _updateSelectionText = (selectedIndex) => {
+    this.setState({
+      selectedIndex,
+    });
+  };
+
+  _renderButtons() {
+    const { showActionSheetWithOptions } = this.props;
+    return (
+      <ShowActionSheetButton
+        // title=""
+        // withTitle
+        // withMessage
+        onSelection={this._updateSelectionText}
+        showActionSheetWithOptions={showActionSheetWithOptions}
+      />
+    );
+  }
   // 获取相机权限
   getPermissionAsync = async () => {
     if (Constants.platform.ios) {
@@ -39,27 +62,6 @@ class UpdateHeadScreen extends React.Component {
         this._pickImage()
       }
     }
-  }
-  // 打开底部弹出框
-  _openModal = () => {
-    const options = ['Delete', 'Save', 'Cancel'];
-    const destructiveButtonIndex = 0;
-    const cancelButtonIndex = 2;
-
-    this.props.showActionSheetWithOptions(
-      {
-        options,
-        cancelButtonIndex,
-        destructiveButtonIndex,
-      },
-      buttonIndex => {
-        // Do something here depending on the button index selected
-      },
-    );
-  }
-  // 关闭弹出框
-  setModalVisible(visible) {
-    this.setState({ modalVisible: visible });
   }
 
   // 修改用户头像
@@ -146,9 +148,7 @@ class UpdateHeadScreen extends React.Component {
       }}>
         <CustomTopBar title="头像" {...this.props} color="black" />
         <View View style={{ flex: 1, flexDirection: 'row-reverse' }}>
-          <TouchableOpacity onPress={this._openModal}>
-            <Entypo name="dots-three-horizontal" size={26} color="#fff" />
-          </TouchableOpacity>
+          {this._renderButtons()}
           <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
             <TouchableOpacity
               onPress={this._pickImage}
@@ -157,14 +157,22 @@ class UpdateHeadScreen extends React.Component {
                 <Image source={{ uri: image }} style={{ width: Dimensions.get('window').width, height: Dimensions.get('window').width }} />}
             </TouchableOpacity>
             {/* <Button title="确认上传" onPress={this._uploadImage} /> */}
+
           </View>
         </View>
-
       </View>
     );
   }
 }
 
-const ConnectedApp = connectActionSheet(UpdateHeadScreen)
+const ConnectedApp = connectActionSheet(UpdateHead)
 
-export default ConnectedApp;
+export default class UpdateHeadScreen extends React.Component {
+  render() {
+    return (
+      <ActionSheetProvider>
+        <ConnectedApp />
+      </ActionSheetProvider>
+    );
+  }
+}
