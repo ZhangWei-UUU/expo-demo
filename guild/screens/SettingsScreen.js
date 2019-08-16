@@ -7,9 +7,7 @@ import {
 import { styles } from '../styles/settings';
 import { Ionicons } from '@expo/vector-icons';
 import { withNavigation } from "react-navigation";
-
-import Remote from '../constants/Remote';
-const API = "/userinfo";
+import request from '../components/request';
 
 class SettingsScreen extends Component {
   constructor(props) {
@@ -33,18 +31,13 @@ class SettingsScreen extends Component {
 
   // 获取用户
   _getUserInfo = async (token) => {
-    try {
-      let res = await fetch(Remote + API + `?token=${token}`);
-      let result = await res.json();
-      if (result.success) {
-        this.setState({
-          user: result.result,
-          refresh: false
-        })
-      } else {
-        Alert.alert("获取用户登录信息失败", "请检查当前网络是否正常")
-      }
-    } catch (err) {
+    let res = await request("GET", `/userinfo?token=${token}`);
+    if (res.success) {
+      this.setState({
+        user: res.result,
+        refresh: false
+      })
+    } else {
       Alert.alert("获取用户登录信息失败", "请检查当前网络是否正常")
     }
   }

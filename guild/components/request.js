@@ -8,19 +8,15 @@ if (development) {
   Remote = "https://polkadot.cloud-wave.cn";
 }
 
-const getToken = async () => {
-  let userToken = await AsyncStorage.getItem('user-token');
-  return userToken;
-}
-
 const fetchGet = async (url) => {
+  let token = await AsyncStorage.getItem('user-token');
   try {
     let res = await fetch(url, {
       method: "GET",
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + getToken()
+        'Authorization': 'Bearer ' + token
       }
     });
     let result = await res.json();
@@ -31,6 +27,7 @@ const fetchGet = async (url) => {
 }
 
 const fetchPost = async (url, data) => {
+  let token = await AsyncStorage.getItem('user-token');
   try {
     let res = await fetch(url, {
       method: "POST",
@@ -38,7 +35,25 @@ const fetchPost = async (url, data) => {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + getToken(),
+        'Authorization': 'Bearer ' + token
+      }
+    });
+    let result = await res.json();
+    return result;
+  } catch (err) {
+    return err.toString()
+  }
+}
+
+const fetchImage = async (url, data) => {
+  let token = await AsyncStorage.getItem('user-token');
+  try {
+    let res = await fetch(url, {
+      method: "POST",
+      body: data,
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        'Authorization': 'Bearer ' + token
       }
     });
     let result = await res.json();
@@ -49,13 +64,14 @@ const fetchPost = async (url, data) => {
 }
 
 const fetchDelete = async (url) => {
+  let token = await AsyncStorage.getItem('user-token');
   try {
     let res = await fetch(url, {
       method: "DELETE",
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + getToken()
+        'Authorization': 'Bearer ' + token
       }
     });
     let result = await res.json();
@@ -72,6 +88,8 @@ const request = (method, url, body) => {
       return fetchGet(Remote + url);
     case "POST":
       return fetchPost(Remote + url, body);
+    case "POST_IMAGE":
+      return fetchImage(Remote + url, body);
     case "DELETE":
       return fetchDelete(Remote + url);
     default:

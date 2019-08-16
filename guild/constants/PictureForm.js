@@ -1,3 +1,4 @@
+
 const PictureForm = (uri) => {
   let uriParts = uri.split('.');
   let fileType = uriParts[uriParts.length - 1];
@@ -7,6 +8,7 @@ const PictureForm = (uri) => {
     name: `photo.${fileType}`,
     type: `image/${fileType}`,
   });
+  console.log("lai", formData)
   return formData;
 }
 

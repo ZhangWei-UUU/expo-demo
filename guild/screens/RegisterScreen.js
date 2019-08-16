@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, DeviceEventEmitter, Alert, TouchableOpacity, Image, TextInput, AsyncStorage } from 'react-native';
 import TopBar from '../components/Topbars';
 import { styles } from '../styles/login';
-import Remote from '../constants/Remote';
+import request from '../components/request';
 
 class RegisterScreen extends Component {
   constructor(props) {
@@ -27,24 +27,26 @@ class RegisterScreen extends Component {
     DeviceEventEmitter.emit('BackToLogin', { login: true });
   }
 
+  // 提交注册
   submit = async () => {
     let { username, password } = this.state;
     let { navigation } = this.props;
     const phone = navigation.getParam('phone');
-    const OPTIONS = {
-      method: "POST",
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ username, password, phone, coin: 0, head: "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" })
+    let data = {
+      username,
+      password,
+      phone,
+      coin: 0,
+      head: "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
     }
+
     try {
-      let res = await fetch(`${Remote}/api/registry`, OPTIONS);
-      let result = await res.json();
-      if (result.success === true) {
-        await AsyncStorage.setItem('user-token', result.token);
+      let res = await request("POST", "/api/registry", data);
+      if (res.success === true) {
+        await AsyncStorage.setItem('user-token', res.token);
         this.props.navigation.push("Settings")
+      } else if (res.success === false) {
+        Alert.alert('注册失败', res.reason);
       } else {
         Alert.alert('注册失败', '请检查网络是否正常');
       }

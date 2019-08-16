@@ -10,10 +10,20 @@ import * as Permissions from 'expo-permissions';
 import TopBarWidthActionSheet from '../components/Topbars/widthActionSheet';
 import { ActionSheetProvider, connectActionSheet } from '@expo/react-native-action-sheet';
 import request from '../components/request';
-import PictureForm from '../constants/PictureForm';
+// import PictureForm from '../constants/PictureForm';
 import Layout from '../constants/Layout';
 
-
+const pictureForm = (uri) => {
+  let uriParts = uri.split('.');
+  let fileType = uriParts[uriParts.length - 1];
+  let formData = new FormData();
+  formData.append('photo', {
+    uri,
+    name: `photo.${fileType}`,
+    type: `image/${fileType}`,
+  });
+  return formData;
+}
 class UpdateHead extends React.Component {
   state = {
     image: null,
@@ -50,17 +60,21 @@ class UpdateHead extends React.Component {
       value: "https://" + value
     };
     let response = await request("POST", "/userinfo/modify", data);
+    console.log(response)
     if (response.n === 1 && response.nModified === 1 && response.ok === 1) {
-      this.props.navigation.navigate("Settings", { refresh: true });
+      Alert.alert("头像更新成功")
+      // this.props.navigation.navigate("Settings", { refresh: true });
     } else {
       Alert.alert("上传失败请检查当前网络是否畅通")
     }
 
   }
-
+  // 手动选择相片
   pickImageFromSheet = (uri) => {
+    this._uploadImage(uri);
     this.setState({ image: uri });
   }
+
   // 选择相片
   _pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -74,9 +88,16 @@ class UpdateHead extends React.Component {
   };
 
   // 上传相片到腾讯COS服务器上
-  _uploadImage = async () => {
-    let data = PictureForm(this.state.image);
-    let result = await request("POST", "/api/uploadImage", data);
+  _uploadImage = async (uri) => {
+    let uriParts = uri.split('.');
+    let fileType = uriParts[uriParts.length - 1];
+    let formData = new FormData();
+    formData.append('photo', {
+      uri,
+      name: `photo.${fileType}`,
+      type: `image/${fileType}`,
+    });
+    let result = await request("POST_IMAGE", "/api/uploadImage", formData);
     if (result.success) {
       this._modifyHead(result.location)
     } else {
