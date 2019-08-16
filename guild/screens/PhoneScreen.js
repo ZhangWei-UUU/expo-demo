@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, TextInput, TouchableOpacity, Alert, Image } from 'react-native';
-import CustomTopBar from '../components/TopBar';
-import { Asset } from 'expo-asset';
-
+import TopBar from '../components/Topbars';
 import { styles } from '../styles/login';
 const phoneReg = /^1(3|4|5|7|8)\d{9}$/;
 
@@ -30,7 +28,7 @@ class PhoneScreen extends Component {
   render() {
     return (
       <View style={styles.body}>
-        <CustomTopBar title="登录/注册" {...this.props} />
+        <TopBar title="输入手机号" {...this.props} />
         <Image source={require('../assets/images/bird-logo.png')}
           style={{ width: 100, height: 150, marginTop: 100, marginBottom: 30 }} />
         <TextInput style={styles.phoneInput}

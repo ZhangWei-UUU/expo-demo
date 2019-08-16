@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
-import { ScrollView, View, Text, TouchableOpacity, AsyncStorage, Alert, DeviceEventEmitter, Image } from 'react-native';
+import {
+  ScrollView, View, Text, TouchableOpacity, AsyncStorage,
+  StatusBar,
+  Alert, DeviceEventEmitter, Image
+} from 'react-native';
 import { styles } from '../styles/settings';
 import { Ionicons } from '@expo/vector-icons';
 import { withNavigation } from "react-navigation";
@@ -86,6 +90,7 @@ class SettingsScreen extends Component {
     let { user } = this.state;
     return (
       <View style={styles.body}>
+        <StatusBar backgroundColor="#ffda1f" barStyle="dark-content" />
         <ScrollView style={{ flex: 1 }}>
           <View style={styles.Header}>
             {user ?

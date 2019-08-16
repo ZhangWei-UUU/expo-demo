@@ -1,7 +1,20 @@
 import React, { Component } from 'react';
 import { AntDesign } from '@expo/vector-icons';
-import { Text, View, TouchableOpacity, Dimensions } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
+import Layout from '../../constants/Layout';
 
+export const styles = StyleSheet.create({
+  wrapper: {
+    paddingTop: 10,
+    height: 50,
+    width: Layout.window.width
+  },
+  left: {
+    flex: 1,
+    flexDirection: 'row',
+    width: 200
+  }
+});
 
 class TopBar extends Component {
   constructor(props) {
@@ -15,13 +28,9 @@ class TopBar extends Component {
   render() {
     let { color } = this.props;
     return (
-      <View style={{ marginTop: 50, height: 30 }}>
+      <View style={styles.wrapper}>
         <TouchableOpacity onPress={this.onBackPress}
-          style={{
-            flex: 1,
-            flexDirection: 'row',
-            width: 100,
-          }}>
+          style={styles.left}>
           <AntDesign name="left" size={20}
             color={color === 'black' ? "#fff" : "#000"}
             style={{ marginRight: 20, marginLeft: 20, marginTop: 5, alignItems: "center", }}

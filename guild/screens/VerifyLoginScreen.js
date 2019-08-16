@@ -1,6 +1,6 @@
 import React, { Component, createRef } from 'react';
 import { Text, View, DeviceEventEmitter, Alert, AsyncStorage, Image } from 'react-native';
-import CustomTopBar from '../components/TopBar';
+import TopBar from '../components/Topbars';
 import CodeInput from 'react-native-confirmation-code-field';
 import { styles } from '../styles/login';
 import request from '../components/request';
@@ -80,7 +80,7 @@ class VerifyLoginScreen extends Component {
     const phone = navigation.getParam('phone');
     return (
       <View style={styles.body}>
-        <CustomTopBar title="登录/注册" {...this.props} />
+        <TopBar title="输入手机验证码" {...this.props} />
         <Image source={require('../assets/images/bird-logo.png')}
           style={{ width: 100, height: 150, marginTop: 100 }} />
         <View >

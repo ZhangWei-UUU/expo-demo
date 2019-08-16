@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, DeviceEventEmitter, Alert, TouchableOpacity, Image, TextInput, AsyncStorage } from 'react-native';
-import CustomTopBar from '../components/TopBar';
+import TopBar from '../components/Topbars';
 import { styles } from '../styles/login';
 import Remote from '../constants/Remote';
 
@@ -57,7 +57,7 @@ class RegisterScreen extends Component {
 
     return (
       <View style={styles.body}>
-        <CustomTopBar title="新用户注册" {...this.props} />
+        <TopBar title="新用户注册" {...this.props} />
         <Image source={require('../assets/images/bird-logo.png')}
           style={{ width: 100, height: 150, marginTop: 100, marginBottom: 50 }} />
         <TextInput style={styles.phoneInput}
