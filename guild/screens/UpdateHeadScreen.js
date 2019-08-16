@@ -22,6 +22,10 @@ class UpdateHead extends React.Component {
 
   componentDidMount() {
     this.getPermissionAsync();
+    let { navigation } = this.props;
+    this.setState({
+      image: navigation.getParam('head')
+    });
   }
 
   // 获取相机权限
@@ -30,15 +34,11 @@ class UpdateHead extends React.Component {
       const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
       if (status !== 'granted') {
         Alert.alert('请开启相机权限!');
-      } else {
-        this._pickImage()
       }
     } else {
       const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
       if (status !== 'granted') {
         Alert.alert('请开启相机权限!');
-      } else {
-        this._pickImage()
       }
     }
   }

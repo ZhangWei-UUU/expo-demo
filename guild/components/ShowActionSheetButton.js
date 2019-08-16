@@ -53,7 +53,6 @@ export default class ShowActionSheetButton extends React.PureComponent {
       ? {
         fontSize: 20,
         fontWeight: '500',
-        color: 'blue',
       }
       : undefined;
     const titleTextStyle = withCustomStyles
@@ -61,13 +60,11 @@ export default class ShowActionSheetButton extends React.PureComponent {
         fontSize: 24,
         textAlign: 'center',
         fontWeight: '700',
-        color: 'orange',
       }
       : undefined;
     const messageTextStyle = withCustomStyles
       ? {
         fontSize: 12,
-        color: 'purple',
         textAlign: 'right',
       }
       : undefined;

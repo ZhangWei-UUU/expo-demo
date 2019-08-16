@@ -22,7 +22,13 @@ class SettingsScreen extends Component {
 
   // 页面跳转
   _jump = (pageName) => {
-    this.props.navigation.navigate(pageName)
+    let { user } = this.state;
+    if (pageName === "UpdateHead") {
+      this.props.navigation.navigate(pageName, { head: user.head })
+    } else {
+      this.props.navigation.navigate(pageName)
+    }
+
   }
 
   // 获取用户
