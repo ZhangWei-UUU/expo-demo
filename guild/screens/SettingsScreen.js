@@ -44,19 +44,19 @@ class SettingsScreen extends Component {
 
   async componentDidMount() {
     const { navigation } = this.props;
-    // this.focusListener = navigation.addListener("didFocus", async () => {
-    //   let userToken = await AsyncStorage.getItem('user-token');
-    //   if (userToken) {
-    //     this._getUserInfo(userToken);
-    //   }
-    // });
+    this.focusListener = navigation.addListener("didFocus", async () => {
+      let userToken = await AsyncStorage.getItem('user-token');
+      if (userToken) {
+        this._getUserInfo(userToken);
+      }
+    });
 
-    // this.listener = DeviceEventEmitter.addListener('BackToLogin', async (url) => {
-    //   let userToken = await AsyncStorage.getItem('user-token');
-    //   if (userToken) {
-    //     this._getUserInfo(userToken);
-    //   }
-    // });
+    this.listener = DeviceEventEmitter.addListener('BackToLogin', async (url) => {
+      let userToken = await AsyncStorage.getItem('user-token');
+      if (userToken) {
+        this._getUserInfo(userToken);
+      }
+    });
 
     try {
       let userToken = await AsyncStorage.getItem('user-token');
@@ -128,7 +128,6 @@ class SettingsScreen extends Component {
                 <View style={styles.barLeft}>
                   <Text>扫一扫</Text>
                 </View>
-
               </View>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => this._jump("Payment")}>
@@ -140,11 +139,9 @@ class SettingsScreen extends Component {
 
               </View>
             </TouchableOpacity>
-
           </View>
           <View style={styles.card}>
             <TouchableOpacity onPress={() => this._jump("Account")}>
-
               <View style={styles.cardBar}>
                 <Ionicons name="md-paper" size={24} color="#72d658" style={styles.barIcon} />
                 <View style={styles.barLeft}>
@@ -156,7 +153,6 @@ class SettingsScreen extends Component {
               </View>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => this._jump("LineTrend")}>
-
               <View style={styles.cardBar}>
                 <Ionicons name="md-pie" size={24} color="#46db97" style={styles.barIcon} />
                 <View style={styles.barLeft}>
@@ -168,7 +164,6 @@ class SettingsScreen extends Component {
               </View>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => this._jump("Register")}>
-
               <View style={styles.cardBar}>
                 <Ionicons name="md-settings" size={24} color="gray" style={styles.barIcon} />
                 <View style={styles.barLeft}>
@@ -179,7 +174,6 @@ class SettingsScreen extends Component {
                 </View>
               </View>
             </TouchableOpacity>
-
           </View>
           {user ? <View style={styles.card}>
             <View style={{ alignItems: "center" }}>
@@ -188,8 +182,6 @@ class SettingsScreen extends Component {
               </TouchableOpacity>
             </View>
           </View> : null}
-
-
         </ScrollView >
       </View >
     );
