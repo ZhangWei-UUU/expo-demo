@@ -26,7 +26,6 @@ class SettingsScreen extends Component {
     } else {
       this.props.navigation.push(pageName, { head: "user.head" })
     }
-
   }
 
   // 获取用户

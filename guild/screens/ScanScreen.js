@@ -14,18 +14,18 @@ class ScanScreen extends Component {
     lastScannedUrl: null,
   };
 
-  async componentDidMount() {
-    this._requestCameraPermission();
-    BackHandler.addEventListener("hardwareBackPress", this.onBackPress);
-  }
+  // async componentDidMount() {
+  //   this._requestCameraPermission();
+  //   BackHandler.addEventListener("hardwareBackPress", this.onBackPress);
+  // }
 
-  componentWillUnmount() {
-    BackHandler.removeEventListener("hardwareBackPress", this.onBackPress);
-  }
+  // componentWillUnmount() {
+  //   BackHandler.removeEventListener("hardwareBackPress", this.onBackPress);
+  // }
 
-  onBackPress = () => {
-    this.props.navigation.pop()
-  }
+  // onBackPress = () => {
+  //   this.props.navigation.pop()
+  // }
 
   _requestCameraPermission = async () => {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
@@ -44,7 +44,6 @@ class ScanScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-
         {this.state.hasCameraPermission === null
           ? <Text>Requesting for camera permission</Text>
           : this.state.hasCameraPermission === false

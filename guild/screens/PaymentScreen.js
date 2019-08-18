@@ -1,41 +1,40 @@
 import React, { Component } from 'react';
-import {
-  Text,
-  View,
-  BackHandler,
-  StatusBar
-} from 'react-native';
+import { Text, View } from 'react-native';
+import QRCode from 'react-native-qrcode';
 import TopBar from '../components/Topbars';
+import { styles } from '../styles/payment';
+import Barcode from 'react-native-barcode-builder';
 
 class PaymentScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      text: 'xxx',
     }
   }
 
-  async componentDidMount() {
-    BackHandler.addEventListener("hardwareBackPress", this.onBackPress);
-  }
+  componentDidMount() {
+    this.setState({ text: "http://facebook.github.io/react-native/" })
 
-  componentWillUnmount() {
-    BackHandler.removeEventListener("hardwareBackPress", this.onBackPress);
   }
-
-  onBackPress = () => {
-    this.props.navigation.pop()
-  }
-
   render() {
+    let { text } = this.state;
     return (
-      <View style={{ flex: 1 }}>
+      <View style={styles.body}>
         <TopBar title="向商户付款" {...this.props} />
-        <StatusBar
-          backgroundColor="#fff"
-          barStyle="dark-content" // Here is where you change the font-color
-        />
-        <Text>向商户付款</Text>
+        <View style={styles.container}>
+          <View style={styles.head}>
+            <Text style={styles.headText}>铂金会员</Text>
+          </View>
+          <Barcode value="Hello World" format="CODE128" />
+          <View style={styles.qrcodeContainer}>
+            <QRCode
+              value={text}
+              size={148}
+              bgColor='#000'
+              fgColor='white' />
+          </View>
+        </View>
       </View >
     );
   }

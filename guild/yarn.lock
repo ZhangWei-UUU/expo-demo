@@ -2101,7 +2101,7 @@ cosmiconfig@^5.0.5:
     js-yaml "^3.13.1"
     parse-json "^4.0.0"
 
-create-react-class@^15.6.2, create-react-class@^15.6.3:
+create-react-class@^15.6.0, create-react-class@^15.6.2, create-react-class@^15.6.3:
   version "15.6.3"
   resolved "http://r.cnpmjs.org/create-react-class/download/create-react-class-15.6.3.tgz#2d73237fb3f970ae6ebe011a9e66f46dbca80036"
   integrity sha1-LXMjf7P5cK5uvgEanmb0bbyoADY=
@@ -4101,6 +4101,11 @@ js-yaml@^3.13.1:
     argparse "^1.0.7"
     esprima "^4.0.0"
 
+jsbarcode@^3.8.0:
+  version "3.11.0"
+  resolved "http://r.cnpmjs.org/jsbarcode/download/jsbarcode-3.11.0.tgz#20623e008b101ef45d0cce9c8022cdf49be28547"
+  integrity sha1-IGI+AIsQHvRdDM6cgCLN9JvihUc=
+
 jsbn@~0.1.0:
   version "0.1.1"
   resolved "http://r.cnpmjs.org/jsbn/download/jsbn-0.1.1.tgz#a5e654c2e5a2deb5f201d96cefbca80c0ef2f513"
@@ -5581,6 +5586,11 @@ punycode@^2.1.0, punycode@^2.1.1:
   resolved "http://r.cnpmjs.org/punycode/download/punycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
   integrity sha1-tYsBCsQMIsVldhbI0sLALHv0eew=
 
+qr.js@0.0.0:
+  version "0.0.0"
+  resolved "http://r.cnpmjs.org/qr.js/download/qr.js-0.0.0.tgz#cace86386f59a0db8050fa90d9b6b0e88a1e364f"
+  integrity sha1-ys6GOG9ZoNuAUPqQ2baw6IoeNk8=
+
 qs@^6.5.0:
   version "6.7.0"
   resolved "http://r.cnpmjs.org/qs/download/qs-6.7.0.tgz#41dc1a015e3d581f1621776be31afb2876a9b1bc"
@@ -5667,6 +5677,13 @@ react-lifecycles-compat@^3.0.4:
   resolved "http://r.cnpmjs.org/react-lifecycles-compat/download/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha1-TxonOv38jzSIqMUWv9p4+HI1I2I=
 
+react-native-barcode-builder@^1.0.5:
+  version "1.0.5"
+  resolved "http://r.cnpmjs.org/react-native-barcode-builder/download/react-native-barcode-builder-1.0.5.tgz#dcc93b6afeec56148b8b3c4e5fb9136a532f7883"
+  integrity sha1-3Mk7av7sVhSLizxOX7kTalMveIM=
+  dependencies:
+    jsbarcode "^3.8.0"
+
 react-native-branch@~3.0.1:
   version "3.0.1"
   resolved "http://r.cnpmjs.org/react-native-branch/download/react-native-branch-3.0.1.tgz#5b07b61cbd290168cd3c3662e017ebe0f356d2ca"
@@ -5713,6 +5730,15 @@ react-native-platform-touchable@^1.1.1:
   version "1.1.1"
   resolved "http://r.cnpmjs.org/react-native-platform-touchable/download/react-native-platform-touchable-1.1.1.tgz#fde4acc65eea585d28b164d0c3716a42129a68e4"
   integrity sha1-/eSsxl7qWF0osWTQw3FqQhKaaOQ=
+
+react-native-qrcode@^0.2.7:
+  version "0.2.7"
+  resolved "http://r.cnpmjs.org/react-native-qrcode/download/react-native-qrcode-0.2.7.tgz#d103166fb1a5b53643e8bf7b88c0672e689ac4f8"
+  integrity sha1-0QMWb7GltTZD6L97iMBnLmiaxPg=
+  dependencies:
+    create-react-class "^15.6.0"
+    prop-types "^15.5.10"
+    qr.js "0.0.0"
 
 react-native-render-html@^4.1.2:
   version "4.1.2"
