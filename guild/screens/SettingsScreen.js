@@ -5,7 +5,7 @@ import {
   Alert, DeviceEventEmitter, Image
 } from 'react-native';
 import { styles } from '../styles/settings';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, AntDesign } from '@expo/vector-icons';
 import { withNavigation } from "react-navigation";
 import request from '../components/request';
 
@@ -122,24 +122,24 @@ class SettingsScreen extends Component {
                 </View>
               </View>
             </TouchableOpacity>
-            <View style={styles.cardBar}>
-              <Ionicons name="md-journal" size={24} color="#ffc73a" style={styles.barIcon} />
-              <View style={styles.barLeft}>
-                <Text>订阅期刊</Text>
+            <TouchableOpacity onPress={() => this._jump("Account")}>
+              <View style={styles.cardBar}>
+                <AntDesign name="qrcode" size={24} color="#ffc73a" style={styles.barIcon} />
+                <View style={styles.barLeft}>
+                  <Text>付款</Text>
+                </View>
+
               </View>
-              <View style={styles.barRight}>
-                <Text style={styles.Num}>0</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => this._jump("Account")}>
+              <View style={styles.cardBar}>
+                <Ionicons name="md-qr-scanner" size={24} color="#ff6165" style={styles.barIcon} />
+                <View style={styles.barLeft}>
+                  <Text>扫一扫</Text>
+                </View>
+
               </View>
-            </View>
-            <View style={styles.cardBar}>
-              <Ionicons name="md-analytics" size={24} color="#ff6165" style={styles.barIcon} />
-              <View style={styles.barLeft}>
-                <Text>消息</Text>
-              </View>
-              <View style={styles.barRight}>
-                <Text style={styles.Num}>0</Text>
-              </View>
-            </View>
+            </TouchableOpacity>
           </View>
           <View style={styles.card}>
             <TouchableOpacity onPress={() => this._jump("Account")}>

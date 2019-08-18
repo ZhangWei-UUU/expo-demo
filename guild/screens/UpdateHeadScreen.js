@@ -60,7 +60,6 @@ class UpdateHead extends React.Component {
       value: "https://" + value
     };
     let response = await request("POST", "/userinfo/modify", data);
-    console.log(response)
     if (response.n === 1 && response.nModified === 1 && response.ok === 1) {
       Alert.alert("头像更新成功")
       // this.props.navigation.navigate("Settings", { refresh: true });
