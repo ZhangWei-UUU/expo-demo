@@ -29,11 +29,11 @@ export default class Home extends PureComponent {
   }
 
   async componentDidMount() {
-    BackHandler.addEventListener("hardwareBackPress", this.onBackPress);
+    // BackHandler.addEventListener("hardwareBackPress", this.onBackPress);
   }
 
   componentWillUnmount() {
-    BackHandler.removeEventListener("hardwareBackPress", this.onBackPress);
+    // BackHandler.removeEventListener("hardwareBackPress", this.onBackPress);
   }
 
   onBackPress = () => {

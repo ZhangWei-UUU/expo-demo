@@ -61,12 +61,12 @@ export default class Home extends PureComponent {
 
   async componentDidMount() {
     this.fetchDataFromServer();
-    BackHandler.addEventListener("hardwareBackPress", this.onBackPress);
+    // BackHandler.addEventListener("hardwareBackPress", this.onBackPress);
 
   }
 
   componentWillUnmount() {
-    BackHandler.removeEventListener("hardwareBackPress", this.onBackPress);
+    // BackHandler.removeEventListener("hardwareBackPress", this.onBackPress);
   }
 
   jump = (e, id) => {

@@ -22,9 +22,9 @@ class SettingsScreen extends Component {
   _jump = (pageName) => {
     let { user } = this.state;
     if (pageName === "UpdateHead") {
-      this.props.navigation.navigate(pageName, { head: user.head })
+      this.props.navigation.push(pageName, { head: "user.head" })
     } else {
-      this.props.navigation.navigate(pageName)
+      this.props.navigation.push(pageName, { head: "user.head" })
     }
 
   }
@@ -44,19 +44,19 @@ class SettingsScreen extends Component {
 
   async componentDidMount() {
     const { navigation } = this.props;
-    this.focusListener = navigation.addListener("didFocus", async () => {
-      let userToken = await AsyncStorage.getItem('user-token');
-      if (userToken) {
-        this._getUserInfo(userToken);
-      }
-    });
+    // this.focusListener = navigation.addListener("didFocus", async () => {
+    //   let userToken = await AsyncStorage.getItem('user-token');
+    //   if (userToken) {
+    //     this._getUserInfo(userToken);
+    //   }
+    // });
 
-    this.listener = DeviceEventEmitter.addListener('BackToLogin', async (url) => {
-      let userToken = await AsyncStorage.getItem('user-token');
-      if (userToken) {
-        this._getUserInfo(userToken);
-      }
-    });
+    // this.listener = DeviceEventEmitter.addListener('BackToLogin', async (url) => {
+    //   let userToken = await AsyncStorage.getItem('user-token');
+    //   if (userToken) {
+    //     this._getUserInfo(userToken);
+    //   }
+    // });
 
     try {
       let userToken = await AsyncStorage.getItem('user-token');
@@ -122,16 +122,7 @@ class SettingsScreen extends Component {
                 </View>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => this._jump("Account")}>
-              <View style={styles.cardBar}>
-                <AntDesign name="qrcode" size={24} color="#ffc73a" style={styles.barIcon} />
-                <View style={styles.barLeft}>
-                  <Text>付款</Text>
-                </View>
-
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => this._jump("Account")}>
+            <TouchableOpacity onPress={() => this._jump("Scan")}>
               <View style={styles.cardBar}>
                 <Ionicons name="md-qr-scanner" size={24} color="#ff6165" style={styles.barIcon} />
                 <View style={styles.barLeft}>
@@ -140,6 +131,16 @@ class SettingsScreen extends Component {
 
               </View>
             </TouchableOpacity>
+            <TouchableOpacity onPress={() => this._jump("Payment")}>
+              <View style={styles.cardBar}>
+                <AntDesign name="qrcode" size={24} color="#ffc73a" style={styles.barIcon} />
+                <View style={styles.barLeft}>
+                  <Text>付款</Text>
+                </View>
+
+              </View>
+            </TouchableOpacity>
+
           </View>
           <View style={styles.card}>
             <TouchableOpacity onPress={() => this._jump("Account")}>

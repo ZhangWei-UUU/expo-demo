@@ -19,6 +19,7 @@
     "@react-navigation/web": "^1.0.0-alpha.9",
     "expo": "^34.0.1",
     "expo-asset": "^6.0.0",
+    "expo-barcode-scanner": "~6.0.0",
     "expo-constants": "~6.0.0",
     "expo-font": "6.0.1",
     "expo-image-picker": "~6.0.0",

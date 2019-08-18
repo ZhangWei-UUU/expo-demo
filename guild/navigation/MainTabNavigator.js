@@ -17,6 +17,8 @@ import PhoneScreen from '../screens/PhoneScreen';
 import LineTrendScreen from '../screens/LineTrendScreen';
 import UpdateHeadScreen from '../screens/UpdateHeadScreen';
 import RegisterScreen from '../screens/RegisterScreen';
+import PaymentScreen from '../screens/PaymentScreen';
+import ScanScreen from '../screens/ScanScreen';
 
 /**
  * 首页栈堆的实现
@@ -70,6 +72,8 @@ LinksStack.path = '';
 const SettingsStack = createStackNavigator(
   {
     Settings: SettingsScreen,
+    Scan: ScanScreen,
+    Payment: PaymentScreen,
     UpdateHead: UpdateHeadScreen,
     Login: VerifyLoginScreen,
     Phone: PhoneScreen,
