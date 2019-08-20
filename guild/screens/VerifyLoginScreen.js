@@ -49,10 +49,8 @@ class VerifyLoginScreen extends Component {
     let { navigation } = this.props;
     const phone = navigation.getParam('phone');
     let response = await request("POST", "/mobile/login/verification", { phone, code });
-    console.log("lai", response)
     if (response.success === true) {
       if (response.token) {
-        console.log(response)
         await AsyncStorage.setItem('user-token', response.token);
         this.props.navigation.push("Settings")
         Alert.alert("登录成功", "", [
