@@ -4,7 +4,6 @@ import CustomTopBar from '../components/TopBar';
 import {
   Text,
   View,
-  Alert,
   StatusBar
 } from 'react-native';
 

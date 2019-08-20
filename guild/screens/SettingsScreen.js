@@ -22,7 +22,7 @@ class SettingsScreen extends Component {
   _jump = (pageName) => {
     let { user } = this.state;
     if (pageName === "UpdateHead") {
-      this.props.navigation.push(pageName, { head: "user.head" })
+      this.props.navigation.push(pageName, { head: user.head })
     } else {
       this.props.navigation.push(pageName, { head: "user.head" })
     }
@@ -75,7 +75,12 @@ class SettingsScreen extends Component {
   _logout = async () => {
     try {
       await AsyncStorage.removeItem('user-token');
-      Alert.alert("退出成功");
+      Alert.alert("退出成功", "", [
+        {
+          text: '关闭',
+          style: 'cancel',
+        }
+      ])
     } catch (error) {
       console.error("删除本地存储错误");
       Alert.alert("退出失败");

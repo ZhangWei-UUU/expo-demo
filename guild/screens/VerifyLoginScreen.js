@@ -48,10 +48,19 @@ class VerifyLoginScreen extends Component {
   onFinishCheckingCode = async code => {
     let { navigation } = this.props;
     const phone = navigation.getParam('phone');
-    let result = await request("POST", "/mobile/login/verification", { phone, code });
-    if (result.success === true) {
-      if (result.result) {
-        Alert.alert("登录成功");
+    let response = await request("POST", "/mobile/login/verification", { phone, code });
+    console.log("lai", response)
+    if (response.success === true) {
+      if (response.token) {
+        console.log(response)
+        await AsyncStorage.setItem('user-token', response.token);
+        this.props.navigation.push("Settings")
+        Alert.alert("登录成功", "", [
+          {
+            text: '关闭',
+            style: 'cancel',
+          }
+        ])
       } else {
         Alert.alert("该手机号尚未注册", "是否注册新账户", [
           {
@@ -61,10 +70,10 @@ class VerifyLoginScreen extends Component {
           { text: '立即注册', onPress: () => { this._register() } },
         ])
       }
-    } else if (result.success === false) {
-      Alert.alert("登录失败", result.reason);
+    } else if (response.success === false) {
+      Alert.alert("登录失败", response.reason);
     } else {
-      Alert.alert("登录失败，请检查网络是否正常", result);
+      Alert.alert("登录失败，请检查网络是否正常", response);
     }
     this.codeInputRef.current.clear();
   };
