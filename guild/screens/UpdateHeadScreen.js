@@ -61,12 +61,18 @@ class UpdateHead extends React.Component {
     };
     let response = await request("POST", "/userinfo/modify", data);
     if (response.n === 1 && response.nModified === 1 && response.ok === 1) {
-      Alert.alert("头像更新成功")
-      // this.props.navigation.navigate("Settings", { refresh: true });
+      Alert.alert("头像更新成功", "", [
+        {
+          text: '关闭',
+          style: 'cancel',
+        }
+      ])
+      setTimeout(() => {
+        this.props.navigation.navigate("Settings", { refresh: true });
+      }, 1500)
     } else {
       Alert.alert("上传失败请检查当前网络是否畅通")
     }
-
   }
   // 手动选择相片
   pickImageFromSheet = (uri) => {

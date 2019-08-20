@@ -144,7 +144,7 @@ class SettingsScreen extends Component {
               </View>
             </TouchableOpacity>
           </View>
-          <View style={styles.card}>
+          {/* <View style={styles.card}>
             <TouchableOpacity onPress={() => this._jump("Account")}>
               <View style={styles.cardBar}>
                 <Ionicons name="md-paper" size={24} color="#72d658" style={styles.barIcon} />
@@ -178,7 +178,7 @@ class SettingsScreen extends Component {
                 </View>
               </View>
             </TouchableOpacity>
-          </View>
+          </View> */}
           {user ? <View style={styles.card}>
             <View style={{ alignItems: "center" }}>
               <TouchableOpacity onPress={this._logout}>
