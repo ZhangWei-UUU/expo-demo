@@ -1,11 +1,11 @@
 import React, { PureComponent } from 'react';
 import CustomHeadBar from '../components/HeadBar';
 import {
-  View, Text, TouchableOpacity, Image, ScrollView, StatusBar,
+  View, Text, Image, ScrollView, StatusBar
 } from 'react-native';
 import Swiper from 'react-native-swiper';
-import { BackHandler } from "react-native";
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { LinearGradient } from 'expo-linear-gradient';
+import { Asset } from 'expo-asset';
 import { styles } from '../styles/index';
 
 const CASES = [
@@ -13,6 +13,19 @@ const CASES = [
   { src: "http://blog.adnansiddiqi.me/wp-content/uploads/2018/03/IPFS.jpg", text: "IPFS分布式存储" },
   { src: "http://test-1253763202.cos.ap-shanghai.myqcloud.com/heads/1564987325493.jpg", text: "Near Protocal入门篇" },
   { src: "https://polkadot.network/content/images/2019/07/image2.png", text: "Substrate 入门篇" },
+]
+
+const ITEMS = [
+  {
+    src: Asset.fromModule(require('../assets/images/news/hack-1.jpg')).uri,
+    title: "安全解密！黑客如何盗取你的MetaMask钱包",
+    time: new Date()
+  },
+  {
+    src: Asset.fromModule(require('../assets/images/news/hack-1.jpg')).uri,
+    text: "安全解密！黑客如何盗取你的MetaMask钱包",
+    time: new Date()
+  },
 ]
 
 export default class Home extends PureComponent {
@@ -44,30 +57,36 @@ export default class Home extends PureComponent {
 
 
   render() {
+    console.log(ITEMS[0].src)
     return (
       <ScrollView style={styles.body}>
         <StatusBar backgroundColor="#fff" barStyle="dark-content" />
         <CustomHeadBar title="logo" {...this.props} />
         <View style={styles.wrapper}>
           <Swiper autoplay >
-            <View style={styles.slide1}>
-              <Image source={require('../assets/images/head-1.jpg')}
-                resizeMode="contain"
-                style={styles.headPic} />
-            </View>
-            <View style={styles.slide2}>
-              <Image source={require('../assets/images/head-1.jpg')}
-                resizeMode="contain"
-                style={styles.headPic} />
-            </View>
-            <View style={styles.slide3}>
-              <Image source={require('../assets/images/head-1.jpg')}
-                resizeMode="contain"
-                style={styles.headPic} />
-            </View>
+            {ITEMS.map((item, key) => (
+              <View style={styles.slide} key={key}>
+                <LinearGradient
+                  colors={['transparent', 'rgba(0,0,0,1.0)']}
+                  style={styles.grandient}
+                >
+                  <Text style={styles.newsTitle}>
+                    {item.title}
+                  </Text>
+                  <Text style={styles.timeTitle}>
+                    {item.time.toString()}
+                  </Text>
+                </LinearGradient>
+                <Image source={{ uri: `${item.src}` }}
+                  resizeMode="contain"
+                  style={styles.mainPicture} />
+              </View>
+            ))}
+
+
           </Swiper>
         </View>
-        <View style={styles.lineWrapper}>
+        {/* <View style={styles.lineWrapper}>
           {this.state.items.map((item, key) => (
             <View key={key} style={styles.lineSingle}>
               <TouchableOpacity onClick={(e, key) => this.jump(e, item.id)} >
@@ -81,7 +100,7 @@ export default class Home extends PureComponent {
               </TouchableOpacity>
             </View>
           ))}
-        </View>
+        </View> */}
         <View>
           <Text style={{ fontSize: 20, fontWeight: "bold", margin: 15 }} >独家文章</Text>
 

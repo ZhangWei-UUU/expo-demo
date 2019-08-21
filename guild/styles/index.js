@@ -8,56 +8,45 @@ export const styles = StyleSheet.create({
   wrapper: {
     height: 240,
   },
-  slide1: {
-    borderRadius: 20,
+  slide: {
+    borderRadius: 10,
     margin: 10,
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     elevation: 2,
     shadowColor: '#000000',
+    backgroundColor: "#e8e8e8",
     shadowOffset: {
       width: 0,
-      height: 3
+      height: 0
     },
-    shadowRadius: 5,
-    shadowOpacity: 1.0,
     position: "relative",
     overflow: 'hidden',
   },
-  slide2: {
-    borderRadius: 20,
-    margin: 10,
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    elevation: 2,
-    shadowColor: '#000000',
-    shadowOffset: {
-      width: 0,
-      height: 3
-    },
-    shadowRadius: 5,
-    shadowOpacity: 1.0,
-    position: "relative",
-    overflow: 'hidden',
+  mainPicture: {
+    height: 240,
+    borderRadius: 10,
   },
-  slide3: {
-    borderRadius: 20,
-    margin: 10,
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    elevation: 2,
-    shadowColor: '#000000',
-    shadowOffset: {
-      width: 0,
-      height: 3
-    },
-    shadowRadius: 5,
-    shadowOpacity: 1.0,
-    position: "relative",
-    overflow: 'hidden',
+  grandient: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 120,
+    height: 100,
+    zIndex: 10,
+    padding: 10
+  },
+  newsTitle: {
+    color: "#fff",
+    fontSize: 20,
+    fontFamily: "space-mono"
+  },
+  timeTitle: {
+    marginTop: 8,
+    color: "#fff",
+    fontSize: 12,
+    fontFamily: "space-mono"
   },
   card: {
     borderRadius: 10,
@@ -80,14 +69,7 @@ export const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: 'bold',
   },
-  headPic: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    bottom: 0,
-    right: 0,
-    borderRadius: 6,
-  },
+
   img: {
     height: 40,
     width: 40,

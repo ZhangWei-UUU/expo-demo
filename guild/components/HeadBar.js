@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { AntDesign } from '@expo/vector-icons';
-import { Text, View, TouchableOpacity, Dimensions } from 'react-native';
+import { Text, View, Image } from 'react-native';
 
 
 class CustomHeadBar extends Component {
@@ -15,14 +15,11 @@ class CustomHeadBar extends Component {
   render() {
     return (
       <View style={{ height: 55, padding: 15 }}>
-
-        <Text style={{
-          width: Dimensions.get('window').width * 0.8,
-          alignItems: "center",
-          fontSize: 24,
-          fontWeight: 'bold'
-        }}>{this.props.title}</Text>
-
+        <View>
+          <Image source={require('../assets/images/logo-char.jpg')}
+            style={{ height: 35, width: 70 }}
+          />
+        </View>
       </View >
     );
   }

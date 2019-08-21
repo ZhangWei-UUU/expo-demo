@@ -93,7 +93,7 @@ class SettingsScreen extends Component {
     let { user } = this.state;
     return (
       <View style={styles.body}>
-        <StatusBar backgroundColor="#ffda1f" barStyle="dark-content" />
+        <StatusBar backgroundColor="#fff" barStyle="dark-content" />
         <ScrollView style={{ flex: 1 }}>
           <View style={styles.Header}>
             {user ?
