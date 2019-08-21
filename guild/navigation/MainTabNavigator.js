@@ -1,0 +1,117 @@
+import React from 'react';
+import { Platform } from 'react-native';
+import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+
+import TabBarIcon from '../components/TabBarIcon';
+import HomeScreen from '../screens/HomeScreen';
+import IndexScreen from '../screens/IndexScreen';
+
+import LinksScreen from '../screens/LinksScreen';
+import SettingsScreen from '../screens/SettingsScreen';
+import ContentScreen from '../screens/ContentScreen';
+import VerifyLoginScreen from '../screens/VerifyLoginScreen';
+import AccountScreen from '../screens/AccountScreen';
+import RevenueScreen from '../screens/RevenueScreen';
+import ResearchScreen from '../screens/ResearchScreen';
+import PhoneScreen from '../screens/PhoneScreen';
+import LineTrendScreen from '../screens/LineTrendScreen';
+import UpdateHeadScreen from '../screens/UpdateHeadScreen';
+import RegisterScreen from '../screens/RegisterScreen';
+import PaymentScreen from '../screens/PaymentScreen';
+import ScanScreen from '../screens/ScanScreen';
+
+/**
+ * 首页栈堆的实现
+ */
+const HomeStack = createStackNavigator(
+  {
+    Index: IndexScreen,
+    Home: HomeScreen,
+    Content: ContentScreen
+  },
+  {
+    initialRouteName: "Index",
+    headerMode: 'none',
+  }
+);
+// 栈集合的配置：1. 文字，2.图标
+HomeStack.navigationOptions = {
+  tabBarLabel: '首页',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={
+        Platform.OS === 'ios'
+          ? `ios-information-circle${focused ? '' : '-outline'}`
+          : 'md-home'
+      }
+    />
+  ),
+};
+
+HomeStack.path = '';
+
+const LinksStack = createStackNavigator(
+  {
+    Links: LinksScreen,
+  },
+  {
+    headerMode: 'none',
+  }
+);
+
+LinksStack.navigationOptions = {
+  tabBarLabel: 'VIP',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-ribbon'} />
+  )
+};
+
+LinksStack.path = '';
+
+const SettingsStack = createStackNavigator(
+  {
+    Settings: SettingsScreen,
+    Scan: ScanScreen,
+    Payment: PaymentScreen,
+    UpdateHead: UpdateHeadScreen,
+    Login: VerifyLoginScreen,
+    Phone: PhoneScreen,
+    Register: RegisterScreen,
+    Account: AccountScreen,
+    LineTrend: LineTrendScreen,
+    Revenue: RevenueScreen,
+    Research: ResearchScreen
+  },
+  {
+    headerMode: 'none',
+  }
+);
+
+SettingsStack.navigationOptions = ({ navigation }) => {
+  let tabBarVisible = true;
+  if (navigation.state.index === 1 || navigation.state.index === 2) {
+    tabBarVisible = false;
+  }
+  return {
+    tabBarVisible,
+    tabBarLabel: '我',
+    tabBarIcon: ({ focused }) => (
+      <TabBarIcon
+        focused={focused}
+        name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
+    ),
+  };
+};
+SettingsStack.path = '';
+
+
+const tabNavigator = createBottomTabNavigator({
+  HomeStack,
+  LinksStack,
+  SettingsStack,
+});
+
+tabNavigator.path = '';
+
+export default tabNavigator;
