@@ -23,7 +23,12 @@ const ITEMS = [
   },
   {
     src: Asset.fromModule(require('../assets/images/news/hack-1.jpg')).uri,
-    text: "安全解密！黑客如何盗取你的MetaMask钱包",
+    title: "安全解密！黑客如何盗取你的MetaMask钱包",
+    time: new Date()
+  },
+  {
+    src: Asset.fromModule(require('../assets/images/news/hack-1.jpg')).uri,
+    title: "安全解密！黑客如何盗取你的MetaMask钱包",
     time: new Date()
   },
 ]
