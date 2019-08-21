@@ -3,7 +3,7 @@ import { AsyncStorage } from 'react-native';
 let development = false;
 let Remote;
 if (development) {
-  Remote = "http://10.73.53.224"
+  Remote = "http://10.73.57.210"
 } else {
   Remote = "https://polkadot.cloud-wave.cn";
 }

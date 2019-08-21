@@ -29,10 +29,6 @@
     },
     "android": {
       "package": "com.guild.deck"
-    },
-    "androidStatusBar": {
-      "backgroundColor": "#e8e8e8",
-      "barStyle": "dark-content"
     }
   }
 }

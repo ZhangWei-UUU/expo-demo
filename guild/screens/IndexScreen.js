@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
 import CustomHeadBar from '../components/HeadBar';
-import { View, Text, TouchableOpacity, Image, ScrollView } from 'react-native';
+import {
+  View, Text, TouchableOpacity, Image, ScrollView, StatusBar,
+} from 'react-native';
 import Swiper from 'react-native-swiper';
 import { BackHandler } from "react-native";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -44,7 +46,8 @@ export default class Home extends PureComponent {
   render() {
     return (
       <ScrollView style={styles.body}>
-        <CustomHeadBar title="首页" {...this.props} />
+        <StatusBar backgroundColor="#fff" barStyle="dark-content" />
+        <CustomHeadBar title="logo" {...this.props} />
         <View style={styles.wrapper}>
           <Swiper autoplay >
             <View style={styles.slide1}>
@@ -80,7 +83,7 @@ export default class Home extends PureComponent {
           ))}
         </View>
         <View>
-          <Text style={{ fontSize: 20, fontWeight: "bold", margin: 15 }} >超值优惠</Text>
+          <Text style={{ fontSize: 20, fontWeight: "bold", margin: 15 }} >独家文章</Text>
 
           <View style={{
             flex: 10,

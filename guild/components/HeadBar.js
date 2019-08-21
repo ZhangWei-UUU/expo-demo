@@ -14,12 +14,12 @@ class CustomHeadBar extends Component {
 
   render() {
     return (
-      <View style={{ marginTop: 30, height: 55, padding: 15 }}>
+      <View style={{ height: 55, padding: 15 }}>
 
         <Text style={{
           width: Dimensions.get('window').width * 0.8,
           alignItems: "center",
-          fontSize: 28,
+          fontSize: 24,
           fontWeight: 'bold'
         }}>{this.props.title}</Text>
 
